@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US History Help — Learn the Past, Shape the Future</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #1a1a2e;
+    --parchment: #f5f0e8;
+    --cream:     #fffdf7;
+    --red:       #c0392b;
+    --gold:      #d4a017;
+    --steel:     #4a6fa5;
+    --mist:      #e8eef6;
+    --success:   #27ae60;
+    --border:    #d9d0bc;
+    --shadow:    0 2px 16px rgba(26,26,46,0.10);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 0.25rem; }
+  .nav-links a {
+    color: #ccc; text-decoration: none;
+    font-size: 0.85rem; font-weight: 500;
+    padding: 0.4rem 0.8rem; border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-links a:hover, .nav-links a.active { background: var(--gold); color: var(--ink); }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; color: #fff; font-size: 1.4rem; }
+
+  /* ── HERO ── */
+  #home {
+    background: linear-gradient(135deg, var(--ink) 0%, #2d3a6b 100%);
+    color: #fff; text-align: center;
+    padding: 5rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  #home::before {
+    content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
+    position: absolute; top: 1.2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gold); font-size: 0.85rem; letter-spacing: 0.5em; opacity: 0.7;
+    white-space: nowrap;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: 1.1rem; color: #bbc4d8; max-width: 520px; margin: 0 auto 2rem; }
+  .hero-stats {
+    display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700; color: var(--gold);
+  }
+  .hero-stat .label { font-size: 0.75rem; color: #99a8c0; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 4rem 2rem; max-width: 1060px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 2.5rem; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700;
+    color: var(--ink);
+  }
+  .divider { border: none; border-top: 2px solid var(--border); margin: 0 auto 4rem; max-width: 1060px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-block; padding: 0.65rem 1.4rem;
+    border-radius: 6px; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; border: none; transition: all 0.15s;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-primary:hover { background: #a93226; transform: translateY(-1px); box-shadow: var(--shadow); }
+  .btn-secondary { background: var(--steel); color: #fff; }
+  .btn-secondary:hover { background: #3b5a8a; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 2px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--steel); color: var(--steel); }
+  .btn-gold { background: var(--gold); color: var(--ink); }
+  .btn-gold:hover { background: #b8880f; }
+
+  /* ── QUIZ ── */
+  #quiz { background: var(--parchment); }
+  .quiz-wrap { background: var(--parchment); }
+  .quiz-topic-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.85rem; margin-bottom: 2rem;
+  }
+  .topic-btn {
+    padding: 0.85rem 0.5rem; border-radius: 8px;
+    border: 2px solid var(--border); background: var(--cream);
+    cursor: pointer; font-size: 0.88rem; font-weight: 600;
+    text-align: center; transition: all 0.15s; color: var(--ink);
+  }
+  .topic-btn:hover { border-color: var(--steel); color: var(--steel); }
+  .topic-btn.selected { border-color: var(--red); background: var(--red); color: #fff; }
+  .topic-icon { font-size: 1.5rem; display: block; margin-bottom: 0.3rem; }
+
+  #quiz-area { display: none; }
+  .quiz-progress-bar-wrap { background: var(--border); border-radius: 99px; height: 6px; margin-bottom: 1.5rem; overflow: hidden; }
+  .quiz-progress-bar { background: var(--red); height: 100%; border-radius: 99px; transition: width 0.3s; }
+  .quiz-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: #777; margin-bottom: 0.5rem; }
+  .quiz-question {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.4;
+  }
+  .quiz-options { display: grid; gap: 0.6rem; margin-bottom: 1.5rem; }
+  .option-btn {
+    padding: 0.8rem 1.1rem; border-radius: 8px;
+    border: 2px solid var(--border); background: var(--cream);
+    cursor: pointer; text-align: left; font-size: 0.92rem;
+    transition: all 0.15s; color: var(--ink); font-family: 'Inter', sans-serif;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--steel); background: var(--mist); }
+  .option-btn.correct { border-color: var(--success); background: #eafaf1; color: var(--success); font-weight: 600; }
+  .option-btn.wrong { border-color: var(--red); background: #fdf0ef; color: var(--red); font-weight: 600; }
+  .quiz-feedback { font-size: 0.9rem; color: #555; min-height: 1.4em; margin-bottom: 1rem; }
+  #quiz-result { display: none; text-align: center; padding: 2rem; }
+  .result-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem; font-weight: 900; color: var(--red);
+  }
+  .result-label { font-size: 1.1rem; margin-bottom: 1.5rem; color: #555; }
+  .result-badges { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .badge { padding: 0.4rem 0.9rem; border-radius: 99px; font-size: 0.8rem; font-weight: 600; }
+  .badge-gold { background: #fff4cc; color: #a07000; border: 1px solid var(--gold); }
+  .badge-silver { background: #f0f0f0; color: #555; border: 1px solid #bbb; }
+  .badge-bronze { background: #fdf0e6; color: #8b5e3c; border: 1px solid #c9956a; }
+
+  /* ── TIMELINE ── */
+  #timeline-section { background: var(--ink); color: #e8e0d0; }
+  #timeline-section .section-title { color: var(--gold); }
+  #timeline-section .section-eyebrow { color: #aaa; }
+  .timeline { position: relative; padding-left: 2.5rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0.75rem; top: 0; bottom: 0;
+    width: 2px; background: var(--gold); opacity: 0.4;
+  }
+  .tl-item { position: relative; margin-bottom: 2rem; cursor: pointer; }
+  .tl-dot {
+    position: absolute; left: -2.5rem; top: 0.3rem;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--gold); border: 3px solid var(--ink);
+    transition: transform 0.2s;
+  }
+  .tl-item:hover .tl-dot { transform: scale(1.4); }
+  .tl-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.2rem;
+  }
+  .tl-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #e8e0d0; }
+  .tl-desc { font-size: 0.88rem; color: #99a8c0; margin-top: 0.2rem; line-height: 1.5; }
+  .tl-expand { display: none; margin-top: 0.6rem; padding: 0.8rem 1rem; background: rgba(255,255,255,0.05); border-radius: 6px; font-size: 0.86rem; color: #bbc4d8; border-left: 3px solid var(--gold); }
+  .tl-item.open .tl-expand { display: block; }
+
+  /* ── LESSONS ── */
+  .lessons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+  .lesson-card {
+    background: var(--cream); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 1.4rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .lesson-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .lesson-era {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--steel); margin-bottom: 0.4rem;
+  }
+  .lesson-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .lesson-summary { font-size: 0.87rem; color: #555; line-height: 1.55; margin-bottom: 1rem; }
+  .lesson-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .tag { font-size: 0.72rem; padding: 0.2rem 0.55rem; border-radius: 99px; background: var(--mist); color: var(--steel); font-weight: 500; }
+
+  /* Lesson modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(26,26,46,0.75); z-index: 200;
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--cream); border-radius: 12px; padding: 2rem;
+    max-width: 640px; width: 100%; max-height: 85vh; overflow-y: auto;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #888;
+  }
+  .modal-era { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--steel); margin-bottom: 0.4rem; }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; }
+  .modal-body { font-size: 0.93rem; line-height: 1.7; color: #333; }
+  .modal-body h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin: 1.2rem 0 0.4rem; color: var(--ink); }
+  .modal-body ul { padding-left: 1.2rem; margin-bottom: 0.8rem; }
+  .modal-body li { margin-bottom: 0.3rem; }
+  .modal-quiz-cta { margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+
+  /* ── DASHBOARD ── */
+  #dashboard { background: var(--parchment); }
+  .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .dash-card {
+    background: var(--cream); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 1.4rem;
+  }
+  .dash-card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: #888; margin-bottom: 1rem;
+  }
+  /* Streak */
+  .streak-display { text-align: center; padding: 0.5rem 0; }
+  .streak-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--red); line-height: 1; }
+  .streak-label { font-size: 0.82rem; color: #888; margin-top: 0.2rem; }
+  .streak-fire { font-size: 2rem; }
+  /* XP bar */
+  .xp-row { display: flex; justify-content: space-between; font-size: 0.8rem; color: #777; margin-bottom: 0.4rem; }
+  .xp-bar-wrap { background: var(--border); border-radius: 99px; height: 8px; overflow: hidden; }
+  .xp-bar { background: linear-gradient(90deg, var(--gold), var(--red)); height: 100%; border-radius: 99px; transition: width 0.5s; }
+  /* Badges grid */
+  .badges-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .badge-item {
+    display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+    padding: 0.5rem 0.7rem; border-radius: 8px;
+    border: 1.5px solid var(--border); font-size: 0.72rem; font-weight: 600;
+    color: #888; min-width: 64px; text-align: center;
+  }
+  .badge-item.earned { border-color: var(--gold); color: var(--ink); background: #fff9e6; }
+  .badge-item .badge-icon { font-size: 1.4rem; }
+  /* Activity log */
+  .activity-log { list-style: none; }
+  .activity-log li {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+    font-size: 0.86rem;
+  }
+  .activity-log li:last-child { border-bottom: none; }
+  .act-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .act-time { font-size: 0.75rem; color: #aaa; white-space: nowrap; }
+  /* Log form */
+  .log-form { display: flex; flex-direction: column; gap: 0.6rem; }
+  .log-form input, .log-form select {
+    padding: 0.55rem 0.75rem; border: 1.5px solid var(--border);
+    border-radius: 6px; font-size: 0.88rem; font-family: 'Inter', sans-serif;
+    background: var(--cream); color: var(--ink); width: 100%;
+  }
+  .log-form input:focus, .log-form select:focus { outline: none; border-color: var(--steel); }
+  .log-validation { font-size: 0.78rem; color: var(--red); min-height: 1em; }
+
+  /* ── SCHEDULING ── */
+  .schedule-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 0.82rem; font-weight: 600; color: #555; }
+  .form-input {
+    padding: 0.6rem 0.8rem; border: 1.5px solid var(--border);
+    border-radius: 6px; font-size: 0.9rem; font-family: 'Inter', sans-serif;
+    background: var(--cream); color: var(--ink); transition: border-color 0.15s;
+  }
+  .form-input:focus { outline: none; border-color: var(--steel); }
+  .form-input.error { border-color: var(--red); }
+  .field-error { font-size: 0.75rem; color: var(--red); min-height: 1em; }
+  .schedule-success {
+    display: none; padding: 1rem 1.2rem;
+    background: #eafaf1; border: 1.5px solid var(--success);
+    border-radius: 8px; color: var(--success); font-weight: 600;
+    margin-top: 1rem; font-size: 0.92rem;
+  }
+  .schedule-list { margin-top: 2rem; }
+  .schedule-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1rem; border: 1.5px solid var(--border);
+    border-radius: 8px; margin-bottom: 0.6rem; background: var(--cream);
+  }
+  .schedule-item-info { font-size: 0.88rem; }
+  .schedule-item-name { font-weight: 600; }
+  .schedule-item-meta { color: #888; font-size: 0.8rem; }
+  .schedule-item-badge { font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 99px; background: var(--mist); color: var(--steel); font-weight: 600; }
+
+  /* ── RESOURCES ── */
+  .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+  .resource-card {
+    padding: 1.2rem; border-radius: 10px;
+    border: 1.5px solid var(--border); background: var(--cream);
+    text-decoration: none; color: var(--ink);
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: block;
+  }
+  .resource-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .resource-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .resource-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .resource-desc { font-size: 0.82rem; color: #666; }
+  .resource-type { display: inline-block; margin-top: 0.6rem; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--steel); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: #99a8c0;
+    text-align: center; padding: 2rem;
+    font-size: 0.82rem;
+    border-top: 3px solid var(--gold);
+  }
+  footer strong { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: var(--ink); padding: 1rem; gap: 0.4rem; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: block; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .schedule-form-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300;
+    background: var(--ink); color: #fff; padding: 0.75rem 1.2rem;
+    border-radius: 8px; font-size: 0.88rem; font-weight: 500;
+    border-left: 4px solid var(--gold);
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.3s; pointer-events: none;
+  }
+  #toast.show { transform: translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#home">US History Help</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#home" class="active" onclick="setActive(this)">Home</a>
+    <a href="#quiz" onclick="setActive(this)">Quiz</a>
+    <a href="#timeline-section" onclick="setActive(this)">Timeline</a>
+    <a href="#lessons" onclick="setActive(this)">Lessons</a>
+    <a href="#dashboard" onclick="setActive(this)">Dashboard</a>
+    <a href="#scheduling" onclick="setActive(this)">Schedule</a>
+    <a href="#resources" onclick="setActive(this)">Resources</a>
+  </div>
+  <button class="hamburger" onclick="toggleNav()" aria-label="Menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <p class="hero-eyebrow">Free · Interactive · Student-Built</p>
+  <h1 class="hero-title">Learn the Past,<br><span>Shape the Future</span></h1>
+  <p class="hero-sub">A free resource for US History students — quizzes, timelines, lessons, and study tracking all in one place.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="#quiz" class="btn btn-primary">Take a Quiz →</a>
+    <a href="#lessons" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.3)">Browse Lessons</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num" id="stat-quizzes">50+</div><div class="label">Quiz Questions</div></div>
+    <div class="hero-stat"><div class="num" id="stat-events">12</div><div class="label">Timeline Events</div></div>
+    <div class="hero-stat"><div class="num" id="stat-lessons">6</div><div class="label">Lessons</div></div>
+    <div class="hero-stat"><div class="num">Free</div><div class="label">Always</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- QUIZ -->
+<section id="quiz" style="padding:4rem 2rem;">
+<div style="max-width:760px;margin:0 auto;">
+  <div class="section-header">
+    <p class="section-eyebrow">Test Yourself</p>
+    <h2 class="section-title">Quick Quiz</h2>
+    <p style="color:#666;margin-top:0.5rem;font-size:0.95rem;">Pick a topic and answer 5 questions. Results are logged to your Dashboard.</p>
+  </div>
+
+  <!-- Topic picker -->
+  <div id="topic-picker">
+    <div class="quiz-topic-grid">
+      <button class="topic-btn" onclick="selectTopic(this,'colonial')"><span class="topic-icon">⚓</span>Colonial Era</button>
+      <button class="topic-btn" onclick="selectTopic(this,'revolution')"><span class="topic-icon">🦅</span>Revolution</button>
+      <button class="topic-btn" onclick="selectTopic(this,'civilwar')"><span class="topic-icon">⚔️</span>Civil War</button>
+      <button class="topic-btn" onclick="selectTopic(this,'reconstruction')"><span class="topic-icon">🏗️</span>Reconstruction</button>
+      <button class="topic-btn" onclick="selectTopic(this,'wwi')"><span class="topic-icon">🌍</span>World War I</button>
+      <button class="topic-btn" onclick="selectTopic(this,'wwii')"><span class="topic-icon">✈️</span>World War II</button>
+      <button class="topic-btn" onclick="selectTopic(this,'civilrights')"><span class="topic-icon">✊</span>Civil Rights</button>
+      <button class="topic-btn" onclick="selectTopic(this,'coldwar')"><span class="topic-icon">☢️</span>Cold War</button>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem;">
+      <button class="btn btn-primary" id="start-quiz-btn" onclick="startQuiz()" disabled>Start Quiz →</button>
+    </div>
+    <p id="topic-validation" style="text-align:center;font-size:0.8rem;color:var(--red);margin-top:0.5rem;min-height:1em;"></p>
+  </div>
+
+  <!-- Quiz area -->
+  <div id="quiz-area">
+    <div class="quiz-meta">
+      <span id="q-topic-label"></span>
+      <span id="q-counter"></span>
+    </div>
+    <div class="quiz-progress-bar-wrap"><div class="quiz-progress-bar" id="quiz-progress-bar"></div></div>
+    <p class="quiz-question" id="quiz-question"></p>
+    <div class="quiz-options" id="quiz-options"></div>
+    <p class="quiz-feedback" id="quiz-feedback"></p>
+    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" style="display:none;">Next →</button>
+  </div>
+
+  <!-- Result -->
+  <div id="quiz-result">
+    <div class="streak-fire">🎉</div>
+    <div class="result-score" id="result-score"></div>
+    <div class="result-label" id="result-label"></div>
+    <div class="result-badges" id="result-badges"></div>
+    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+      <a href="#dashboard" class="btn btn-secondary">View Dashboard</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- TIMELINE -->
+<section id="timeline-section" style="padding:4rem 2rem;">
+<div class="section" style="padding:0;">
+  <div class="section-header">
+    <p class="section-eyebrow">Key Moments</p>
+    <h2 class="section-title" style="color:var(--gold);">US History Timeline</h2>
+    <p style="color:#99a8c0;margin-top:0.5rem;font-size:0.95rem;">Click any event to expand details.</p>
+  </div>
+  <div class="timeline" id="timeline-container"></div>
+</div>
+</section>
+
+<hr class="divider" style="border-color:#333;">
+
+<!-- LESSONS -->
+<section id="lessons" style="padding:4rem 2rem;">
+<div class="section" style="padding:0;">
+  <div class="section-header">
+    <p class="section-eyebrow">Study Guides</p>
+    <h2 class="section-title">Lessons</h2>
+    <p style="color:#666;margin-top:0.5rem;font-size:0.95rem;">Original lesson summaries written for students, by a student.</p>
+  </div>
+  <div class="lessons-grid" id="lessons-grid"></div>
+</div>
+</section>
+
+<!-- Lesson modal -->
+<div class="modal-overlay" id="lesson-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <p class="modal-era" id="modal-era"></p>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-quiz-cta">
+      <p style="font-size:0.85rem;color:#666;margin-bottom:0.6rem;">Ready to test yourself on this topic?</p>
+      <button class="btn btn-primary" id="modal-quiz-btn" onclick="goToQuizFromLesson()">Take the Quiz →</button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- DASHBOARD -->
+<section id="dashboard" style="padding:4rem 2rem;">
+<div class="section" style="padding:0;">
+  <div class="section-header">
+    <p class="section-eyebrow">Your Progress</p>
+    <h2 class="section-title">Dashboard</h2>
+  </div>
+  <div class="dashboard-grid">
+
+    <!-- Streak -->
+    <div class="dash-card">
+      <div class="dash-card-title">Study Streak</div>
+      <div class="streak-display">
+        <div class="streak-fire">🔥</div>
+        <div class="streak-num" id="streak-num">0</div>
+        <div class="streak-label">day streak</div>
+      </div>
+    </div>
+
+    <!-- XP -->
+    <div class="dash-card">
+      <div class="dash-card-title">Experience Points</div>
+      <div class="xp-row"><span id="xp-level">Level 1 — Apprentice</span><span id="xp-count">0 XP</span></div>
+      <div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar" style="width:0%"></div></div>
+      <p style="font-size:0.78rem;color:#aaa;margin-top:0.5rem;" id="xp-next">0 XP to next level</p>
+    </div>
+
+    <!-- Badges -->
+    <div class="dash-card" style="grid-column:1/-1;">
+      <div class="dash-card-title">Badges Earned</div>
+      <div class="badges-grid" id="badges-grid"></div>
+    </div>
+
+    <!-- Log activity -->
+    <div class="dash-card">
+      <div class="dash-card-title">Log Study Session</div>
+      <div class="log-form">
+        <div>
+          <select id="log-topic" class="form-input">
+            <option value="">— Select a topic —</option>
+            <option>Colonial Era</option>
+            <option>Revolution</option>
+            <option>Civil War</option>
+            <option>Reconstruction</option>
+            <option>World War I</option>
+            <option>World War II</option>
+            <option>Civil Rights</option>
+            <option>Cold War</option>
+          </select>
+          <p class="log-validation" id="log-topic-err"></p>
+        </div>
+        <div>
+          <input type="number" id="log-minutes" placeholder="Minutes studied (e.g. 30)" min="1" max="480" class="form-input">
+          <p class="log-validation" id="log-minutes-err"></p>
+        </div>
+        <button class="btn btn-primary" onclick="logActivity()">Log Session</button>
+      </div>
+    </div>
+
+    <!-- Activity log -->
+    <div class="dash-card">
+      <div class="dash-card-title">Recent Activity</div>
+      <ul class="activity-log" id="activity-log">
+        <li style="color:#aaa;font-size:0.86rem;">No activity yet — take a quiz or log a session!</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- SCHEDULING -->
+<section id="scheduling" style="padding:4rem 2rem;">
+<div class="section" style="padding:0;">
+  <div class="section-header">
+    <p class="section-eyebrow">Peer Tutoring</p>
+    <h2 class="section-title">Schedule a Session</h2>
+    <p style="color:#666;margin-top:0.5rem;font-size:0.95rem;">Book a peer tutoring or group study session. All fields are required.</p>
+  </div>
+
+  <div style="max-width:640px;margin:0 auto;">
+    <div class="schedule-form-grid">
+      <div class="form-group">
+        <label for="s-name">Your Name</label>
+        <input type="text" id="s-name" class="form-input" placeholder="e.g. Alex Johnson">
+        <p class="field-error" id="err-name"></p>
+      </div>
+      <div class="form-group">
+        <label for="s-email">Email Address</label>
+        <input type="email" id="s-email" class="form-input" placeholder="you@school.edu">
+        <p class="field-error" id="err-email"></p>
+      </div>
+      <div class="form-group">
+        <label for="s-topic">Topic</label>
+        <select id="s-topic" class="form-input">
+          <option value="">— Choose a topic —</option>
+          <option>Colonial Era</option>
+          <option>Revolution</option>
+          <option>Civil War</option>
+          <option>Reconstruction</option>
+          <option>World War I</option>
+          <option>World War II</option>
+          <option>Civil Rights</option>
+          <option>Cold War</option>
+        </select>
+        <p class="field-error" id="err-topic"></p>
+      </div>
+      <div class="form-group">
+        <label for="s-type">Session Type</label>
+        <select id="s-type" class="form-input">
+          <option value="">— Choose type —</option>
+          <option>1-on-1 Tutoring</option>
+          <option>Group Study (2–4 students)</option>
+          <option>Exam Prep Session</option>
+        </select>
+        <p class="field-error" id="err-type"></p>
+      </div>
+      <div class="form-group">
+        <label for="s-date">Preferred Date</label>
+        <input type="date" id="s-date" class="form-input">
+        <p class="field-error" id="err-date"></p>
+      </div>
+      <div class="form-group">
+        <label for="s-time">Preferred Time</label>
+        <select id="s-time" class="form-input">
+          <option value="">— Choose time —</option>
+          <option>Morning (8–11 AM)</option>
+          <option>Afternoon (12–3 PM)</option>
+          <option>Evening (4–7 PM)</option>
+        </select>
+        <p class="field-error" id="err-time"></p>
+      </div>
+      <div class="form-group full">
+        <label for="s-notes">Additional Notes <span style="font-weight:400;color:#aaa;">(optional)</span></label>
+        <input type="text" id="s-notes" class="form-input" placeholder="Any specific questions or areas you want to focus on?">
+      </div>
+    </div>
+    <div style="margin-top:1.25rem;">
+      <button class="btn btn-primary" style="width:100%;padding:0.8rem;" onclick="submitSchedule()">Request Session →</button>
+    </div>
+    <div class="schedule-success" id="schedule-success">
+      ✅ Session requested! You'll receive a confirmation email within 24 hours.
+    </div>
+  </div>
+
+  <!-- Upcoming sessions -->
+  <div class="schedule-list" style="max-width:640px;margin:2rem auto 0;" id="schedule-list"></div>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- RESOURCES -->
+<section id="resources" style="padding:4rem 2rem;">
+<div class="section" style="padding:0;">
+  <div class="section-header">
+    <p class="section-eyebrow">External Tools</p>
+    <h2 class="section-title">Resources</h2>
+  </div>
+  <div class="resources-grid">
+    <a href="https://www.khanacademy.org/humanities/us-history" target="_blank" class="resource-card">
+      <div class="resource-icon">🎓</div>
+      <div class="resource-title">Khan Academy — US History</div>
+      <div class="resource-desc">Free video lessons covering all major eras from Colonial to Modern America.</div>
+      <span class="resource-type">Video Lessons</span>
+    </a>
+    <a href="https://www.history.com/topics/us-history" target="_blank" class="resource-card">
+      <div class="resource-icon">📺</div>
+      <div class="resource-title">History.com</div>
+      <div class="resource-desc">Articles, videos, and primary sources on key events and figures.</div>
+      <span class="resource-type">Reference</span>
+    </a>
+    <a href="https://www.loc.gov/classroom-materials/" target="_blank" class="resource-card">
+      <div class="resource-icon">🏛️</div>
+      <div class="resource-title">Library of Congress</div>
+      <div class="resource-desc">Primary sources, documents, photos, and classroom materials.</div>
+      <span class="resource-type">Primary Sources</span>
+    </a>
+    <a href="https://www.nps.gov/subjects/tellingallamericansstories/index.htm" target="_blank" class="resource-card">
+      <div class="resource-icon">🏞️</div>
+      <div class="resource-title">National Park Service</div>
+      <div class="resource-desc">Explore historic sites and the stories behind America's landmarks.</div>
+      <span class="resource-type">Exploration</span>
+    </a>
+    <a href="https://quizlet.com/subject/us-history/" target="_blank" class="resource-card">
+      <div class="resource-icon">🃏</div>
+      <div class="resource-title">Quizlet — US History</div>
+      <div class="resource-desc">Flashcard sets and study modes for vocabulary and key events.</div>
+      <span class="resource-type">Flashcards</span>
+    </a>
+    <a href="https://www.archives.gov/founding-docs" target="_blank" class="resource-card">
+      <div class="resource-icon">📜</div>
+      <div class="resource-title">National Archives</div>
+      <div class="resource-desc">Read the actual Declaration of Independence, Constitution, and Bill of Rights.</div>
+      <span class="resource-type">Founding Documents</span>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>US History Help</strong> — Built for students, by a student.</p>
+  <p style="margin-top:0.4rem;">Part of the FBLA Website Design project · <em>"Learn the past to fix the future"</em></p>
+</footer>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+
+const QUIZ_DATA = {
+  colonial: [
+    { q:"Which document established the first form of self-government in the American colonies?", a:1, opts:["Mayflower Compact","House of Burgesses charter","Magna Carta","Articles of Confederation"], exp:"The House of Burgesses (1619) was the first representative legislative body in colonial America." },
+    { q:"What was the primary purpose of the Navigation Acts passed by England?", a:2, opts:["Protect Native American lands","Allow colonial self-rule","Restrict colonial trade to benefit England","Establish religious freedom"], exp:"The Navigation Acts required that colonial trade pass through England, keeping profits within the British Empire." },
+    { q:"Which colony was founded primarily as a refuge for persecuted Catholics?", a:3, opts:["Pennsylvania","Massachusetts","Maryland","Virginia"], exp:"Maryland was founded in 1632 by Lord Baltimore as a haven for Catholics facing persecution in England." },
+    { q:"The Halfway Covenant (1662) addressed what issue in Puritan communities?", a:0, opts:["Church membership for those not fully converted","Land distribution to new settlers","Trade agreements with Native Americans","Military service requirements"], exp:"The Halfway Covenant allowed partial church membership for people who had not fully converted, keeping them connected to the church." },
+    { q:"What was the significance of Bacon's Rebellion (1676)?", a:1, opts:["It secured voting rights for all colonists","It revealed class tensions and led to increased reliance on enslaved labor","It ended conflict with Native Americans","It established religious tolerance in Virginia"], exp:"Bacon's Rebellion exposed tensions between wealthy planters and poor farmers, pushing planters toward enslaved African labor as a more controllable workforce." }
+  ],
+  revolution: [
+    { q:"The phrase 'no taxation without representation' referred to what colonial grievance?", a:0, opts:["Colonists were taxed by Parliament where they had no elected representatives","Colonists refused to pay any taxes","England taxed only wealthy colonists","Colonial assemblies were abolished"], exp:"Colonists argued that Parliament could not legitimately tax them because they had no elected members in Parliament." },
+    { q:"Which battle is considered the turning point of the American Revolution?", a:2, opts:["Lexington and Concord","Bunker Hill","Saratoga","Yorktown"], exp:"The American victory at Saratoga (1777) convinced France to enter the war as an American ally, which proved crucial to independence." },
+    { q:"The Declaration of Independence was primarily drafted by whom?", a:1, opts:["Benjamin Franklin","Thomas Jefferson","John Adams","George Washington"], exp:"Thomas Jefferson was the principal author of the Declaration, though the Continental Congress made revisions before adoption." },
+    { q:"What was the main weakness of the Articles of Confederation?", a:3, opts:["It gave too much power to the president","It allowed slavery in all states","It had no court system","Congress could not levy taxes or enforce laws on states"], exp:"Under the Articles, Congress had no power to tax citizens directly or compel states to follow federal laws, making national government very weak." },
+    { q:"The Battle of Yorktown (1781) effectively ended the Revolution because:", a:2, opts:["Washington captured the British capital","France withdrew its support","Cornwallis surrendered his army, and Britain lost will to continue fighting","The British Navy was destroyed"], exp:"Cornwallis's surrender at Yorktown with over 7,000 troops was a devastating blow that convinced Britain to negotiate peace." }
+  ],
+  civilwar: [
+    { q:"What was Abraham Lincoln's primary stated goal at the start of the Civil War?", a:1, opts:["Abolish slavery immediately","Preserve the Union","Punish the Southern states","Expand territory westward"], exp:"Lincoln initially framed the war as a struggle to preserve the Union, not to abolish slavery, in order to maintain border state loyalty." },
+    { q:"The Emancipation Proclamation (1863) freed enslaved people in:", a:0, opts:["Confederate states still in rebellion","All states including border states","Only states that rejoined the Union","The entire United States"], exp:"The Proclamation applied only to enslaved people in Confederate states still in rebellion — it was a war measure, not a universal abolition law." },
+    { q:"Which battle was the bloodiest single day in American military history?", a:2, opts:["Gettysburg","Vicksburg","Antietam","Bull Run"], exp:"The Battle of Antietam (September 17, 1862) resulted in approximately 22,000 casualties in a single day." },
+    { q:"The Battle of Gettysburg was significant because:", a:3, opts:["It ended the war","It freed all enslaved people","The Union captured Richmond","It stopped the Confederacy's northern invasion and is seen as a turning point"], exp:"Gettysburg (July 1–3, 1863) repelled Lee's invasion of Pennsylvania and, combined with Vicksburg, marked the war's decisive turning point." },
+    { q:"What did the 13th Amendment accomplish?", a:1, opts:["Gave formerly enslaved people citizenship","Abolished slavery throughout the United States","Gave Black men the right to vote","Divided Confederate states into military districts"], exp:"Ratified in 1865, the 13th Amendment formally abolished slavery and involuntary servitude throughout the United States." }
+  ],
+  reconstruction: [
+    { q:"Presidential Reconstruction differed from Congressional Reconstruction primarily because:", a:0, opts:["It was much more lenient toward Southern states","It required military occupation of the South","It gave land to formerly enslaved people","It immediately granted Black men voting rights"], exp:"Lincoln and Johnson's Presidential Reconstruction offered easy terms for Southern re-admission, while Congressional Reconstruction was far stricter." },
+    { q:"'Forty acres and a mule' referred to:", a:2, opts:["A Confederate general's estate","A Reconstruction-era tax","A promise of land redistribution to freedmen that was largely unfulfilled","A Northern homestead policy"], exp:"General Sherman's Special Field Order 15 promised 40-acre plots to freedmen, but President Johnson reversed it, leaving most freedpeople without land." },
+    { q:"The Freedmen's Bureau was established to:", a:1, opts:["Punish Confederate leaders","Help formerly enslaved people transition to freedom through education and labor contracts","Enforce the Black Codes","Redistribute Southern land to Northern investors"], exp:"The Freedmen's Bureau provided food, housing, education, legal assistance, and labor contract oversight to formerly enslaved people and poor white Southerners." },
+    { q:"Black Codes enacted in Southern states after the Civil War were designed to:", a:3, opts:["Protect the civil rights of freedpeople","Integrate public schools","Provide land to formerly enslaved people","Restrict the freedom of Black Southerners and maintain a cheap labor supply"], exp:"Black Codes severely limited Black Southerners' rights to travel, work, own property, and assemble, effectively recreating conditions close to slavery." },
+    { q:"The end of Reconstruction is typically marked by:", a:2, opts:["The passage of the 15th Amendment","The election of Ulysses Grant","The Compromise of 1877, which removed federal troops from the South","The assassination of President Garfield"], exp:"The Compromise of 1877 resolved the disputed 1876 election; Hayes became president and federal troops were withdrawn from the South, ending Reconstruction." }
+  ],
+  wwi: [
+    { q:"The immediate trigger for World War I was:", a:1, opts:["Germany's invasion of France","The assassination of Archduke Franz Ferdinand","The sinking of the Lusitania","The collapse of the Ottoman Empire"], exp:"The June 1914 assassination of Austro-Hungarian heir Franz Ferdinand set off a chain of alliance obligations that pulled major powers into war." },
+    { q:"The Zimmermann Telegram proposed that Mexico:", a:0, opts:["Attack the United States in exchange for German support to reclaim Texas, New Mexico, and Arizona","Remain neutral in World War I","Join the Allied Powers","Allow German submarines to use Mexican ports"], exp:"Germany offered Mexico military support to invade the US and reclaim lost territories — the telegram, intercepted by Britain, helped bring the US into the war." },
+    { q:"Wilson's Fourteen Points called for:", a:2, opts:["Harsh punishment of Germany","American withdrawal from Europe","Self-determination of peoples and a League of Nations","Division of German colonies among the Allies"], exp:"Wilson's plan emphasized national self-determination, open diplomacy, freedom of the seas, arms reduction, and a League of Nations for collective security." },
+    { q:"The Treaty of Versailles was controversial in the US because:", a:3, opts:["It was too lenient on Germany","It gave too much territory to France","It required the US to pay war reparations","The Senate refused to ratify it, fearing League of Nations would drag the US into future wars"], exp:"Republican senators, led by Henry Cabot Lodge, argued the League of Nations would require Congress to give up its constitutional power to declare war." },
+    { q:"World War I changed American society by:", a:1, opts:["Reducing immigration dramatically","Accelerating the Great Migration of Black Americans to Northern cities","Eliminating labor unions","Ending women's suffrage movements"], exp:"With labor demand soaring and immigration slowing, hundreds of thousands of Black Southerners moved North seeking better wages and less racial violence — the Great Migration." }
+  ],
+  wwii: [
+    { q:"The US entered World War II after:", a:0, opts:["Japan attacked Pearl Harbor on December 7, 1941","Germany invaded Poland","France fell to Nazi Germany","Italy surrendered to the Allies"], exp:"The surprise Japanese attack on Pearl Harbor killed over 2,400 Americans, and Congress declared war on Japan the following day." },
+    { q:"Executive Order 9066 resulted in:", a:2, opts:["The internment of German Americans","The creation of the Women's Army Corps","The forced internment of Japanese Americans in camps","Rationing of food and fuel"], exp:"Over 120,000 Japanese Americans — most of them US citizens — were forcibly relocated to internment camps, a widely condemned violation of civil liberties." },
+    { q:"The D-Day invasion took place at:", a:1, opts:["Sicily, Italy","Normandy, France","Anzio, Italy","Dunkirk, France"], exp:"Operation Overlord's D-Day landings on June 6, 1944, at five Normandy beaches opened the long-awaited Western Front against Nazi Germany." },
+    { q:"The Manhattan Project was:", a:3, opts:["A plan to rebuild New York after the war","An operation to liberate Nazi-occupied France","An Allied intelligence operation","A secret program to develop the atomic bomb"], exp:"The Manhattan Project, led by the US with British and Canadian support, produced the first nuclear weapons, which were dropped on Hiroshima and Nagasaki in August 1945." },
+    { q:"The Marshall Plan (1948) aimed to:", a:0, opts:["Rebuild war-devastated European economies to prevent the spread of communism","Create a military alliance against the Soviet Union","Establish the United Nations","Prosecute Nazi war criminals"], exp:"The US invested over $13 billion to help rebuild Western European economies, believing that prosperity would make those nations resistant to communist movements." }
+  ],
+  civilrights: [
+    { q:"Brown v. Board of Education (1954) ruled that:", a:1, opts:["Separate but equal facilities were constitutional","Racial segregation in public schools was unconstitutional","African Americans had the right to vote","Affirmative action programs were required"], exp:"The Supreme Court unanimously overturned Plessy v. Ferguson (1896), ruling that 'separate educational facilities are inherently unequal.'" },
+    { q:"Rosa Parks' refusal to give up her seat led to:", a:0, opts:["The Montgomery Bus Boycott, a 381-day protest that desegregated city buses","The March on Washington","The founding of the NAACP","The Little Rock Crisis"], exp:"Parks' 1955 arrest sparked the Montgomery Bus Boycott, which lasted over a year and catapulted Dr. Martin Luther King Jr. to national prominence." },
+    { q:"The Civil Rights Act of 1964 prohibited:", a:2, opts:["Housing discrimination only","Poll taxes","Discrimination based on race, color, religion, sex, or national origin in employment and public accommodations","Literacy tests for voting"], exp:"The landmark 1964 Act banned discrimination in public places, outlawed employment discrimination, and created the Equal Employment Opportunity Commission." },
+    { q:"The Voting Rights Act of 1965 directly targeted:", a:3, opts:["Property requirements for voting","Age restrictions on voting","Campaign finance abuses","Discriminatory practices like literacy tests that prevented Black Southerners from voting"], exp:"The Act banned literacy tests and other tactics used to disenfranchise Black voters, and provided for federal oversight of elections in areas with histories of discrimination." },
+    { q:"Martin Luther King Jr.'s philosophy of nonviolent resistance was influenced by:", a:1, opts:["Malcolm X's Black Power movement","Mahatma Gandhi's methods in India","Marcus Garvey's Back to Africa movement","W.E.B. Du Bois's Niagara Movement"], exp:"King explicitly drew on Gandhi's successful nonviolent campaigns against British colonialism in India as a model for the American civil rights struggle." }
+  ],
+  coldwar: [
+    { q:"The Truman Doctrine (1947) pledged US support to:", a:0, opts:["Free peoples resisting communist takeover, starting with Greece and Turkey","Rebuild Europe through economic aid","Create a military alliance in Western Europe","Develop nuclear weapons to deter Soviet aggression"], exp:"Truman asked Congress for aid to Greece and Turkey, establishing the broader principle that the US would assist nations threatened by communist subversion or external pressure." },
+    { q:"The Korean War (1950–1953) ended with:", a:2, opts:["A decisive US victory","North Korea surrendering","An armistice roughly restoring the pre-war border at the 38th parallel","South Korea being absorbed into North Korea"], exp:"After three years of fighting and over 36,000 American deaths, the war ended in a stalemate — the armistice line remained near the 38th parallel where the war began." },
+    { q:"The Cuban Missile Crisis (1962) was resolved when:", a:1, opts:["The US invaded Cuba and removed the missiles","The Soviet Union agreed to remove missiles from Cuba; the US pledged not to invade Cuba and quietly removed missiles from Turkey","Cuba voluntarily disarmed","The UN imposed sanctions on the Soviet Union"], exp:"Kennedy and Khrushchev reached a secret agreement — Soviets removed Cuban missiles; the US publicly pledged no Cuba invasion and privately agreed to remove Jupiter missiles from Turkey." },
+    { q:"McCarthyism refers to:", a:3, opts:["The US policy of containing Soviet expansion","Truman's foreign aid program","The Korean War military strategy","Senator McCarthy's aggressive, often unsubstantiated accusations of communist infiltration in US institutions"], exp:"Senator Joseph McCarthy's sweeping accusations of communist subversion in the government, military, and entertainment industry created a climate of fear and ruined many careers." },
+    { q:"The fall of the Berlin Wall (1989) symbolized:", a:0, opts:["The collapse of communist control in Eastern Europe and the beginning of the end of the Cold War","The beginning of German reunification only","A Soviet military retreat","US victory in a direct military confrontation"], exp:"The Wall's fall triggered a cascade of democratic revolutions across Eastern Europe and accelerated the Soviet Union's collapse, effectively ending the Cold War." }
+  ]
+};
+
+const TIMELINE_EVENTS = [
+  { year:1607, title:"Jamestown Founded", desc:"First permanent English settlement in North America established in Virginia.", detail:"English settlers faced starvation, disease, and conflict with the Powhatan Confederacy. The colony survived largely due to tobacco cultivation, which became Virginia's economic foundation." },
+  { year:1776, title:"Declaration of Independence", desc:"The thirteen colonies formally declared independence from Britain.", detail:"Drafted primarily by Thomas Jefferson, the Declaration articulated Enlightenment principles of natural rights and popular sovereignty, establishing the philosophical foundation of American democracy." },
+  { year:1787, title:"Constitutional Convention", desc:"Delegates in Philadelphia drafted the United States Constitution.", detail:"The Great Compromise resolved the debate over representation by creating a bicameral legislature. The Constitution established a federal system with separation of powers and checks and balances." },
+  { year:1803, title:"Louisiana Purchase", desc:"The US doubled in size by purchasing vast territory from France for $15 million.", detail:"Napoleon sold the territory to fund his European wars. President Jefferson, despite constitutional doubts, seized the opportunity — the purchase opened the interior of the continent to American expansion." },
+  { year:1861, title:"Civil War Begins", desc:"Confederate forces attacked Fort Sumter, beginning the deadliest war in American history.", detail:"The war's root cause was the expansion of slavery into new territories. Over four years, approximately 620,000–750,000 soldiers died — more than all other American wars combined through Vietnam." },
+  { year:1865, title:"End of Civil War & 13th Amendment", desc:"Confederate surrender at Appomattox and abolition of slavery.", detail:"Lee's surrender on April 9, 1865 ended the war. Weeks later, Lincoln was assassinated. The 13th Amendment, ratified in December 1865, formally abolished slavery throughout the United States." },
+  { year:1920, title:"19th Amendment Ratified", desc:"Women's right to vote guaranteed nationwide.", detail:"After 72 years of suffrage activism beginning at Seneca Falls (1848), the 19th Amendment was ratified. It stands as one of the largest expansions of voting rights in American history." },
+  { year:1929, title:"Great Depression Begins", desc:"The stock market crash triggered the worst economic crisis in US history.", detail:"By 1933, unemployment reached 25%. FDR's New Deal programs — Social Security, the FDIC, the SEC, public works projects — restructured the relationship between the federal government and the economy." },
+  { year:1941, title:"US Enters World War II", desc:"Japan attacked Pearl Harbor; the US declared war the next day.", detail:"The attack killed 2,403 Americans and wounded 1,178. The US mobilized 16 million service members and transformed its economy into the 'arsenal of democracy,' decisively shifting the war's outcome." },
+  { year:1954, title:"Brown v. Board of Education", desc:"Supreme Court ruled racial segregation in schools unconstitutional.", detail:"Chief Justice Warren wrote that 'separate educational facilities are inherently unequal.' The ruling overturned Plessy v. Ferguson (1896) and became the legal cornerstone of the Civil Rights Movement." },
+  { year:1964, title:"Civil Rights Act Signed", desc:"President Johnson signed landmark legislation banning racial discrimination.", detail:"The Act prohibited discrimination in public accommodations, banned employment discrimination, and created the EEOC. Combined with the Voting Rights Act of 1965, it dismantled the legal framework of Jim Crow." },
+  { year:1969, title:"Moon Landing", desc:"Apollo 11 astronauts became the first humans to walk on the Moon.", detail:"Neil Armstrong and Buzz Aldrin landed on July 20, 1969, fulfilling Kennedy's 1961 challenge. The achievement represented the culmination of the Space Race and remains one of humanity's greatest technological feats." }
+];
+
+const LESSONS = [
+  {
+    era:"Colonial Era", title:"Colonial America: Seeds of a Nation",
+    summary:"How thirteen very different colonies developed distinct economies, religious traditions, and ideas of self-governance that would eventually unite against British rule.",
+    tags:["Government","Economy","Religion"], topic:"colonial",
+    body:`<h4>The Three Colonial Regions</h4>
+<p>The thirteen colonies are best understood in three regional groups, each shaped by its climate, economy, and population.</p>
+<p><strong>New England</strong> (Massachusetts, Connecticut, Rhode Island, New Hampshire) was dominated by Puritan religious culture and a maritime economy of fishing, shipbuilding, and trade. Town meetings gave ordinary citizens a voice in local governance — a foundation of American democratic tradition.</p>
+<p><strong>Middle Colonies</strong> (New York, New Jersey, Pennsylvania, Delaware) were the most ethnically and religiously diverse, with German, Dutch, Quaker, and other populations. Known as the "breadbasket," they exported wheat and other grains.</p>
+<p><strong>Southern Colonies</strong> (Virginia, Maryland, North Carolina, South Carolina, Georgia) relied on plantation agriculture — tobacco, rice, and indigo — worked increasingly by enslaved Africans after the 1660s.</p>
+<h4>Seeds of Self-Government</h4>
+<ul><li>The <strong>Mayflower Compact</strong> (1620) established consent of the governed as a principle</li><li>The <strong>Virginia House of Burgesses</strong> (1619) was America's first representative assembly</li><li>The <strong>New England town meeting</strong> gave colonists direct experience with democratic participation</li></ul>
+<h4>Path to Revolution</h4>
+<p>After the French and Indian War (1754–1763), Britain needed revenue and began taxing the colonies more heavily. The Stamp Act (1765), Townshend Acts (1767), and Tea Act (1773) each provoked increasing resistance, from protest to boycott to the Boston Massacre (1770) and Boston Tea Party (1773).</p>`
+  },
+  {
+    era:"Revolution & Founding", title:"The American Revolution: Causes, War & Legacy",
+    summary:"From colonial grievances to battlefield victory — how thirteen colonies became a nation and what ideals they built it on.",
+    tags:["Independence","Constitution","Liberty"], topic:"revolution",
+    body:`<h4>Root Causes</h4>
+<p>The Revolution grew from both practical grievances and philosophical principles. Practically, colonists resented "taxation without representation" — Parliament was taxing them while they had no elected members in Parliament. Philosophically, Enlightenment thinkers like John Locke argued that governments derive their authority from the consent of the governed, and people have the right to overthrow governments that violate their natural rights.</p>
+<h4>Key Battles & Turning Points</h4>
+<ul>
+<li><strong>Lexington & Concord (1775)</strong> — "The shot heard 'round the world" opened armed conflict</li>
+<li><strong>Bunker Hill (1775)</strong> — Costly British victory that showed colonists would fight</li>
+<li><strong>Trenton (1776)</strong> — Washington's Christmas crossing of the Delaware revived Patriot morale</li>
+<li><strong>Saratoga (1777)</strong> — Decisive American victory that brought France into the war as an ally</li>
+<li><strong>Yorktown (1781)</strong> — Cornwallis's surrender effectively ended the war</li>
+</ul>
+<h4>The Founding Documents</h4>
+<p>The <strong>Declaration of Independence</strong> (1776) established that "all men are created equal" with unalienable rights to "life, liberty, and the pursuit of happiness." The <strong>Constitution</strong> (1787) created a federal government with separation of powers. The <strong>Bill of Rights</strong> (1791) protected individual liberties from government overreach.</p>`
+  },
+  {
+    era:"Civil War Era", title:"The Civil War: America's Defining Conflict",
+    summary:"The war's causes, turning points, key figures, and lasting consequences for the nation and for the millions held in slavery.",
+    tags:["Slavery","Union","Lincoln"], topic:"civilwar",
+    body:`<h4>Root Causes: More Than One Issue</h4>
+<p>While slavery was the central cause, other factors contributed: economic differences between the industrial North and agricultural South, states' rights disputes, and the question of slavery's expansion into western territories. Lincoln's 1860 election — without a single Southern electoral vote — convinced Southern leaders that slavery's future was threatened.</p>
+<h4>The War's Major Phases</h4>
+<p><strong>1861–1862: Early Confederacy Advantages.</strong> Confederate generals like Robert E. Lee and Stonewall Jackson won major early victories. The Union struggled to find effective generals.</p>
+<p><strong>1862–1863: Turning Point.</strong> Antietam (Sept. 1862) stopped Lee's Northern invasion and allowed Lincoln to issue the Emancipation Proclamation. Gettysburg and Vicksburg (both July 1863) proved the decisive turning point.</p>
+<p><strong>1864–1865: Union Victory.</strong> Grant's grinding campaigns in Virginia and Sherman's March to the Sea broke Confederate resistance. Lee surrendered at Appomattox Courthouse on April 9, 1865.</p>
+<h4>Legacy</h4>
+<ul><li>620,000–750,000 dead — more than all other American wars combined through Vietnam</li><li>Slavery abolished (13th Amendment, 1865)</li><li>Federal authority established as supreme over states</li><li>Reconstruction era raises questions about equality still debated today</li></ul>`
+  },
+  {
+    era:"Civil Rights Movement", title:"The Civil Rights Movement: Freedom's Long Road",
+    summary:"How ordinary Americans — Black and white — organized to dismantle Jim Crow and win legal equality through legislation.",
+    tags:["Equality","Nonviolence","Legislation"], topic:"civilrights",
+    body:`<h4>Background: Jim Crow America</h4>
+<p>After Reconstruction ended in 1877, Southern states systematically disenfranchised Black voters through literacy tests, poll taxes, and grandfather clauses. Plessy v. Ferguson (1896) legalized "separate but equal" segregation. Lynching and racial terrorism enforced the system. Despite these conditions, the NAACP (founded 1909) and other organizations kept fighting.</p>
+<h4>The Movement Builds (1954–1960)</h4>
+<ul>
+<li><strong>Brown v. Board (1954)</strong> — Supreme Court overturned school segregation</li>
+<li><strong>Montgomery Bus Boycott (1955–56)</strong> — Rosa Parks's arrest sparked a 381-day boycott that desegregated city buses and launched Dr. King</li>
+<li><strong>Little Rock Crisis (1957)</strong> — Eisenhower sent federal troops to enforce school integration</li>
+<li><strong>Sit-ins (1960)</strong> — Students demanded service at segregated lunch counters; the tactic spread across the South</li>
+</ul>
+<h4>Legislative Victories (1963–1965)</h4>
+<p>The <strong>March on Washington</strong> (August 1963) drew 250,000 people. King's "I Have a Dream" speech galvanized national support. The <strong>Civil Rights Act of 1964</strong> banned discrimination in public accommodations and employment. The <strong>Voting Rights Act of 1965</strong>, passed after Bloody Sunday in Selma, dismantled barriers to Black voting.</p>`
+  },
+  {
+    era:"World Wars", title:"America in the World Wars",
+    summary:"How the US was drawn into both global conflicts, the pivotal role it played, and how the wars transformed American society.",
+    tags:["WWI","WWII","Home Front"], topic:"wwii",
+    body:`<h4>World War I: The War to End All Wars (1917–1918)</h4>
+<p>The US stayed neutral until 1917, when Germany resumed unrestricted submarine warfare and the Zimmermann Telegram was revealed. America's entry tipped the balance. Wilson's Fourteen Points shaped the peace — but the Senate rejected the League of Nations, and the harsh Treaty of Versailles sowed seeds of the next war.</p>
+<h4>World War II: The Arsenal of Democracy (1941–1945)</h4>
+<p>Pearl Harbor (December 7, 1941) ended American isolationism overnight. The US mobilized 16 million service members and transformed its economy. Women entered the workforce in massive numbers (symbolized by Rosie the Riveter). Black Americans served in segregated units and returned home demanding the rights they'd fought for abroad — laying groundwork for the Civil Rights Movement.</p>
+<h4>The Home Front</h4>
+<ul><li>Rationing of food, fuel, and rubber</li><li>War bonds sold to finance the conflict</li><li>Japanese American internment (Executive Order 9066) — a grave civil liberties violation</li><li>The Manhattan Project secretly developed the atomic bomb</li></ul>
+<h4>Legacy</h4>
+<p>WWII ended the Great Depression, established the US as a superpower, and led to the UN and the postwar international order. The dropping of atomic bombs on Hiroshima and Nagasaki remains one of the most debated decisions in American history.</p>`
+  },
+  {
+    era:"Cold War Era", title:"The Cold War: Superpower Standoff",
+    summary:"Four decades of ideological, military, and geopolitical competition between the US and Soviet Union that shaped the modern world.",
+    tags:["Communism","Nuclear","Space Race"], topic:"coldwar",
+    body:`<h4>Origins (1945–1950)</h4>
+<p>After WWII, the US and Soviet Union emerged as rival superpowers with incompatible visions — liberal democracy and capitalism vs. communist authoritarianism. The Truman Doctrine (1947) pledged to contain communism worldwide. The Marshall Plan ($13 billion) rebuilt Western Europe. The formation of NATO (1949) and the Soviet atomic bomb test the same year set the stage for decades of rivalry.</p>
+<h4>Flashpoints</h4>
+<ul>
+<li><strong>Korean War (1950–53)</strong> — First hot war of the Cold War; ended in stalemate at the 38th parallel</li>
+<li><strong>McCarthyism (1950–54)</strong> — Red Scare accusations destroyed careers and chilled free speech</li>
+<li><strong>Sputnik & the Space Race (1957–69)</strong> — Soviet satellite launch shocked America into investing in science education; the US won by landing on the Moon</li>
+<li><strong>Cuban Missile Crisis (1962)</strong> — The world came closest to nuclear war; resolved by secret diplomacy</li>
+<li><strong>Vietnam War (1964–75)</strong> — Deepened distrust of government and divided the nation</li>
+</ul>
+<h4>End of the Cold War (1989–1991)</h4>
+<p>Reagan's military buildup, the Soviet economy's failures, and reformist leader Gorbachev's policies (glasnost and perestroika) all contributed. The Berlin Wall fell November 9, 1989. The Soviet Union dissolved December 25, 1991.</p>`
+  }
+];
+
+// ─── STATE ──────────────────────────────────────────────────────────────────
+let state = {
+  xp: 0, streak: 0, lastStudied: null,
+  badges: [], activities: [], sessions: [],
+  quizTopic: null, currentQ: 0, score: 0, quizAnswered: false,
+  currentLesson: null
+};
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('ush_state');
+    if (s) state = { ...state, ...JSON.parse(s) };
+  } catch(e) {}
+}
+function saveState() {
+  try { localStorage.setItem('ush_state', JSON.stringify(state)); } catch(e) {}
+}
+
+// ─── NAV ─────────────────────────────────────────────────────────────────────
+function setActive(el) {
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('navLinks').classList.remove('open');
+}
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ─── TOAST ───────────────────────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── QUIZ ────────────────────────────────────────────────────────────────────
+function selectTopic(btn, topic) {
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  state.quizTopic = topic;
+  document.getElementById('start-quiz-btn').disabled = false;
+  document.getElementById('topic-validation').textContent = '';
+}
+
+function startQuiz() {
+  if (!state.quizTopic) {
+    document.getElementById('topic-validation').textContent = 'Please select a topic first.';
+    return;
+  }
+  state.currentQ = 0; state.score = 0;
+  document.getElementById('topic-picker').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const qs = QUIZ_DATA[state.quizTopic];
+  const q = qs[state.currentQ];
+  state.quizAnswered = false;
+  const total = qs.length;
+  document.getElementById('q-counter').textContent = `${state.currentQ + 1} / ${total}`;
+  document.getElementById('q-topic-label').textContent = state.quizTopic.charAt(0).toUpperCase() + state.quizTopic.slice(1).replace('wwi','WWI').replace('wwii','WWII');
+  document.getElementById('quiz-progress-bar').style.width = `${(state.currentQ / total) * 100}%`;
+  document.getElementById('quiz-question').textContent = q.q;
+  document.getElementById('quiz-feedback').textContent = '';
+  document.getElementById('next-btn').style.display = 'none';
+  const opts = document.getElementById('quiz-options');
+  opts.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = o;
+    btn.onclick = () => answerQuestion(i, btn);
+    opts.appendChild(btn);
+  });
+}
+
+function answerQuestion(i, btn) {
+  if (state.quizAnswered) return;
+  state.quizAnswered = true;
+  const q = QUIZ_DATA[state.quizTopic][state.currentQ];
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach(b => b.disabled = true);
+  if (i === q.a) {
+    btn.classList.add('correct');
+    state.score++;
+    document.getElementById('quiz-feedback').textContent = '✓ Correct! ' + q.exp;
+    document.getElementById('quiz-feedback').style.color = 'var(--success)';
+  } else {
+    btn.classList.add('wrong');
+    btns[q.a].classList.add('correct');
+    document.getElementById('quiz-feedback').textContent = '✗ ' + q.exp;
+    document.getElementById('quiz-feedback').style.color = 'var(--red)';
+  }
+  document.getElementById('next-btn').style.display = 'inline-block';
+  document.getElementById('next-btn').textContent = state.currentQ + 1 < QUIZ_DATA[state.quizTopic].length ? 'Next →' : 'See Results →';
+}
+
+function nextQuestion() {
+  state.currentQ++;
+  if (state.currentQ < QUIZ_DATA[state.quizTopic].length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'block';
+  const total = QUIZ_DATA[state.quizTopic].length;
+  const pct = Math.round((state.score / total) * 100);
+  document.getElementById('result-score').textContent = `${state.score}/${total}`;
+  const labels = ['Keep studying — you\'ve got this!', 'Good effort — review the explanations!', 'Nice work — getting there!', 'Great job!', 'Outstanding! Perfect score!'];
+  document.getElementById('result-label').textContent = pct < 40 ? labels[0] : pct < 60 ? labels[1] : pct < 80 ? labels[2] : pct < 100 ? labels[3] : labels[4];
+
+  // XP & badges
+  const xpEarned = state.score * 10;
+  addXP(xpEarned);
+  updateStreak();
+  const earned = [];
+  if (pct === 100) { earned.push({ icon:'🌟', name:'Perfect Score', cls:'badge-gold' }); checkBadge('perfect'); }
+  if (pct >= 80)   { earned.push({ icon:'🏆', name:'High Scorer', cls:'badge-gold' }); checkBadge('highscore'); }
+  if (pct >= 60)   { earned.push({ icon:'📚', name:'Studied Hard', cls:'badge-silver' }); checkBadge('studied'); }
+  earned.push({ icon:'⭐', name:`+${xpEarned} XP`, cls:'badge-bronze' });
+
+  const rb = document.getElementById('result-badges');
+  rb.innerHTML = earned.map(b => `<span class="badge ${b.cls}">${b.icon} ${b.name}</span>`).join('');
+
+  addActivity(`Completed ${topicLabel(state.quizTopic)} Quiz — ${state.score}/${total} (${pct}%)`, '📝');
+  saveState();
+  renderDashboard();
+}
+
+function restartQuiz() {
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('topic-picker').style.display = 'block';
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('selected'));
+  state.quizTopic = null;
+  document.getElementById('start-quiz-btn').disabled = true;
+}
+
+function topicLabel(t) {
+  const map = { colonial:'Colonial Era', revolution:'Revolution', civilwar:'Civil War', reconstruction:'Reconstruction', wwi:'WWI', wwii:'WWII', civilrights:'Civil Rights', coldwar:'Cold War' };
+  return map[t] || t;
+}
+
+// ─── XP & BADGES ─────────────────────────────────────────────────────────────
+const LEVELS = [
+  {min:0,   label:'Apprentice'},
+  {min:50,  label:'Student'},
+  {min:150, label:'Scholar'},
+  {min:300, label:'Historian'},
+  {min:500, label:'Expert'},
+  {min:800, label:'Master Historian'}
+];
+
+function addXP(amt) {
+  state.xp = (state.xp || 0) + amt;
+  toast(`+${amt} XP earned!`);
+}
+
+function checkBadge(id) {
+  if (!state.badges) state.badges = [];
+  if (!state.badges.includes(id)) { state.badges.push(id); toast('🏅 New badge unlocked!'); }
+}
+
+function updateStreak() {
+  const today = new Date().toDateString();
+  if (state.lastStudied === today) return;
+  const yesterday = new Date(Date.now() - 86400000).toDateString();
+  state.streak = state.lastStudied === yesterday ? (state.streak || 0) + 1 : 1;
+  state.lastStudied = today;
+  if (state.streak >= 3) checkBadge('streak3');
+  if (state.streak >= 7) checkBadge('streak7');
+}
+
+// ─── TIMELINE ────────────────────────────────────────────────────────────────
+function renderTimeline() {
+  const container = document.getElementById('timeline-container');
+  container.innerHTML = TIMELINE_EVENTS.map((e, i) => `
+    <div class="tl-item" onclick="toggleTL(${i})" id="tl-${i}">
+      <div class="tl-dot"></div>
+      <div class="tl-year">${e.year}</div>
+      <div class="tl-title">${e.title}</div>
+      <div class="tl-desc">${e.desc}</div>
+      <div class="tl-expand">${e.detail}</div>
+    </div>
+  `).join('');
+}
+
+function toggleTL(i) {
+  const el = document.getElementById(`tl-${i}`);
+  el.classList.toggle('open');
+}
+
+// ─── LESSONS ─────────────────────────────────────────────────────────────────
+function renderLessons() {
+  const grid = document.getElementById('lessons-grid');
+  grid.innerHTML = LESSONS.map((l, i) => `
+    <div class="lesson-card" onclick="openLesson(${i})">
+      <div class="lesson-era">${l.era}</div>
+      <div class="lesson-title">${l.title}</div>
+      <div class="lesson-summary">${l.summary}</div>
+      <div class="lesson-tags">${l.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+  `).join('');
+}
+
+function openLesson(i) {
+  const l = LESSONS[i];
+  state.currentLesson = l.topic;
+  document.getElementById('modal-era').textContent = l.era;
+  document.getElementById('modal-title').textContent = l.title;
+  document.getElementById('modal-body').innerHTML = l.body;
+  document.getElementById('lesson-modal').classList.add('open');
+  addActivity(`Read lesson: ${l.title}`, '📖');
+  addXP(5);
+  saveState();
+  renderDashboard();
+}
+
+function closeModal() {
+  document.getElementById('lesson-modal').classList.remove('open');
+}
+
+function goToQuizFromLesson() {
+  closeModal();
+  document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    const map = { colonial:'colonial', revolution:'revolution', civilwar:'civilwar', reconstruction:'reconstruction', wwi:'wwi', wwii:'wwii', civilrights:'civilrights', coldwar:'coldwar' };
+    const t = map[state.currentLesson];
+    if (t) {
+      const btn = document.querySelector(`.topic-btn[onclick*="${t}"]`);
+      if (btn) selectTopic(btn, t);
+    }
+  }, 600);
+}
+
+// ─── DASHBOARD ───────────────────────────────────────────────────────────────
+const ALL_BADGES = [
+  { id:'perfect',   icon:'🌟', name:'Perfect Score' },
+  { id:'highscore', icon:'🏆', name:'High Scorer' },
+  { id:'studied',   icon:'📚', name:'Studied Hard' },
+  { id:'streak3',   icon:'🔥', name:'3-Day Streak' },
+  { id:'streak7',   icon:'⚡', name:'7-Day Streak' },
+  { id:'logger',    icon:'📋', name:'Session Logger' }
+];
+
+function renderDashboard() {
+  // Streak
+  document.getElementById('streak-num').textContent = state.streak || 0;
+
+  // XP
+  const xp = state.xp || 0;
+  let level = LEVELS[0];
+  for (let i = LEVELS.length - 1; i >= 0; i--) { if (xp >= LEVELS[i].min) { level = LEVELS[i]; break; } }
+  const nextLevel = LEVELS[LEVELS.indexOf(level) + 1];
+  document.getElementById('xp-level').textContent = `Level ${LEVELS.indexOf(level) + 1} — ${level.label}`;
+  document.getElementById('xp-count').textContent = `${xp} XP`;
+  const pct = nextLevel ? Math.min(100, Math.round(((xp - level.min) / (nextLevel.min - level.min)) * 100)) : 100;
+  document.getElementById('xp-bar').style.width = pct + '%';
+  document.getElementById('xp-next').textContent = nextLevel ? `${nextLevel.min - xp} XP to next level` : 'Max level reached!';
+
+  // Badges
+  const grid = document.getElementById('badges-grid');
+  grid.innerHTML = ALL_BADGES.map(b => {
+    const earned = (state.badges || []).includes(b.id);
+    return `<div class="badge-item ${earned ? 'earned' : ''}"><span class="badge-icon">${b.icon}</span>${b.name}</div>`;
+  }).join('');
+
+  // Activity
+  const log = document.getElementById('activity-log');
+  if (!state.activities || state.activities.length === 0) {
+    log.innerHTML = '<li style="color:#aaa;font-size:0.86rem;">No activity yet — take a quiz or log a session!</li>';
+  } else {
+    log.innerHTML = state.activities.slice(-6).reverse().map(a =>
+      `<li><span class="act-icon">${a.icon}</span><span style="flex:1">${a.text}</span><span class="act-time">${a.time}</span></li>`
+    ).join('');
+  }
+}
+
+function addActivity(text, icon) {
+  if (!state.activities) state.activities = [];
+  state.activities.push({ text, icon, time: new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) });
+}
+
+// Log form
+function logActivity() {
+  const topic = document.getElementById('log-topic').value;
+  const mins = document.getElementById('log-minutes').value;
+  let valid = true;
+  document.getElementById('log-topic-err').textContent = '';
+  document.getElementById('log-minutes-err').textContent = '';
+
+  if (!topic) { document.getElementById('log-topic-err').textContent = 'Please select a topic.'; valid = false; }
+  if (!mins || mins < 1 || mins > 480) { document.getElementById('log-minutes-err').textContent = 'Enter a valid number of minutes (1–480).'; valid = false; }
+  if (!valid) return;
+
+  addXP(Math.floor(parseInt(mins) / 5) * 5);
+  updateStreak();
+  checkBadge('logger');
+  addActivity(`Studied ${topic} for ${mins} minutes`, '⏱️');
+  saveState();
+  renderDashboard();
+  document.getElementById('log-topic').value = '';
+  document.getElementById('log-minutes').value = '';
+  toast('Session logged! Keep it up 🔥');
+}
+
+// ─── SCHEDULING ──────────────────────────────────────────────────────────────
+function validateField(id, errId, msg, condition) {
+  const el = document.getElementById(id);
+  const errEl = document.getElementById(errId);
+  if (condition) {
+    el.classList.add('error'); errEl.textContent = msg; return false;
+  } else {
+    el.classList.remove('error'); errEl.textContent = ''; return true;
+  }
+}
+
+function submitSchedule() {
+  const name    = document.getElementById('s-name').value.trim();
+  const email   = document.getElementById('s-email').value.trim();
+  const topic   = document.getElementById('s-topic').value;
+  const type    = document.getElementById('s-type').value;
+  const date    = document.getElementById('s-date').value;
+  const time    = document.getElementById('s-time').value;
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const today   = new Date().toISOString().split('T')[0];
+
+  const v = [
+    validateField('s-name',  'err-name',  'Name is required.',                    !name),
+    validateField('s-email', 'err-email', 'Enter a valid email address.',          !emailRe.test(email)),
+    validateField('s-topic', 'err-topic', 'Please select a topic.',                !topic),
+    validateField('s-type',  'err-type',  'Please select a session type.',         !type),
+    validateField('s-date',  'err-date',  'Please select a date (today or later).', !date || date < today),
+    validateField('s-time',  'err-time',  'Please select a preferred time.',       !time)
+  ];
+
+  if (v.some(x => !x)) return;
+
+  if (!state.sessions) state.sessions = [];
+  state.sessions.push({ name, topic, type, date, time });
+  saveState();
+  renderSessions();
+
+  document.getElementById('schedule-success').style.display = 'block';
+  ['s-name','s-email','s-notes'].forEach(id => document.getElementById(id).value = '');
+  ['s-topic','s-type','s-date','s-time'].forEach(id => document.getElementById(id).value = '');
+  setTimeout(() => document.getElementById('schedule-success').style.display = 'none', 5000);
+}
+
+function renderSessions() {
+  const list = document.getElementById('schedule-list');
+  if (!state.sessions || state.sessions.length === 0) { list.innerHTML = ''; return; }
+  list.innerHTML = '<p style="font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.6rem;">Requested Sessions</p>' +
+    state.sessions.slice(-4).reverse().map(s => `
+      <div class="schedule-item">
+        <div class="schedule-item-info">
+          <div class="schedule-item-name">${s.type} — ${s.topic}</div>
+          <div class="schedule-item-meta">${s.date} · ${s.time} · ${s.name}</div>
+        </div>
+        <span class="schedule-item-badge">Pending</span>
+      </div>
+    `).join('');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  renderTimeline();
+  renderLessons();
+  renderDashboard();
+  renderSessions();
+
+  // Set min date for scheduling
+  document.getElementById('s-date').min = new Date().toISOString().split('T')[0];
+
+  // Close modal on overlay click
+  document.getElementById('lesson-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+});
+</script>
+</body>
+</html>
