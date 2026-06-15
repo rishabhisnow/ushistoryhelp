@@ -3,70 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>US History Help</title>
+<title>US History Help — Learn the Past, Shape the Future</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1a1a2e;--parchment:#f5f0e8;--cream:#fffdf7;--red:#c0392b;--gold:#d4a017;--steel:#4a6fa5;--mist:#e8eef6;--success:#27ae60;--border:#d9d0bc;--shadow:0 2px 16px rgba(26,26,46,.1);}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.6;}
-/* AUTH */
-#auth{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,var(--ink) 0%,#2d3a6b 100%);padding:1.5rem;}
-.abox{background:var(--cream);border-radius:14px;padding:2.5rem;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,.3);}
-.abrand{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--ink);text-align:center;margin-bottom:.25rem;}
-.atag{font-size:.82rem;color:#888;text-align:center;margin-bottom:2rem;}
-.atabs{display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1.5rem;}
-.atab{flex:1;padding:.6rem;text-align:center;font-size:.88rem;font-weight:600;cursor:pointer;background:var(--parchment);color:#888;border:none;transition:all .15s;}
-.atab.on{background:var(--ink);color:#fff;}
-.af{display:flex;flex-direction:column;gap:.9rem;}
-.af input{padding:.7rem .9rem;border:1.5px solid var(--border);border-radius:7px;font-size:.92rem;font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);}
-.af input:focus{outline:none;border-color:var(--steel);}
-.af input.err{border-color:var(--red);}
-.aerr{font-size:.78rem;color:var(--red);min-height:1em;}
-.abtn{padding:.75rem;color:#fff;border:none;border-radius:7px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .15s;}
-.abtn.red{background:var(--red);}.abtn.red:hover{background:#a93226;}
-.abtn.blue{background:var(--steel);}.abtn.blue:hover{background:#3b5a8a;}
-.adiv{text-align:center;font-size:.78rem;color:#aaa;}
-/* NAV */
+
+/* ── GATE POPUP ─────────────────────────────── */
+#gate-popup{display:none;position:fixed;inset:0;background:rgba(26,26,46,.75);z-index:900;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(3px);}
+#gate-popup.show{display:flex;}
+.gate-box{background:var(--cream);border-radius:18px;padding:2.5rem 2rem;max-width:400px;width:100%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center;animation:popIn .22s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+.gate-close{position:absolute;top:.9rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#bbb;line-height:1;}
+.gate-close:hover{color:#888;}
+.gate-icon{font-size:2.5rem;margin-bottom:.6rem;}
+.gate-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:.4rem;}
+.gate-msg{font-size:.87rem;color:#666;margin-bottom:1.75rem;line-height:1.55;}
+.gate-actions{display:flex;flex-direction:column;gap:.6rem;}
+.gate-btn{padding:.72rem 1rem;border-radius:8px;font-size:.92rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;}
+.gate-btn.primary{background:var(--red);color:#fff;}.gate-btn.primary:hover{background:#a93226;}
+.gate-btn.secondary{background:var(--steel);color:#fff;}.gate-btn.secondary:hover{background:#3b5a8a;}
+.gate-btn.demo{background:var(--parchment);color:var(--ink);border:1.5px solid var(--border);}.gate-btn.demo:hover{border-color:var(--steel);}
+.gate-skip{background:none;border:none;color:#bbb;font-size:.78rem;cursor:pointer;margin-top:.3rem;}
+.gate-skip:hover{color:#888;}
+
+/* ── AUTH MODAL ─────────────────────────────── */
+#auth-modal{display:none;position:fixed;inset:0;background:rgba(26,26,46,.75);z-index:800;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(3px);}
+#auth-modal.show{display:flex;}
+.auth-box{background:var(--cream);border-radius:14px;padding:2.5rem;width:100%;max-width:420px;position:relative;box-shadow:0 16px 50px rgba(0,0,0,.3);animation:popIn .22s cubic-bezier(.34,1.56,.64,1);}
+.auth-close{position:absolute;top:.9rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#bbb;}
+.auth-close:hover{color:#888;}
+.auth-brand{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--ink);text-align:center;margin-bottom:.2rem;}
+.auth-tag{font-size:.82rem;color:#888;text-align:center;margin-bottom:1.75rem;}
+.auth-tabs{display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1.5rem;}
+.auth-tab{flex:1;padding:.6rem;text-align:center;font-size:.88rem;font-weight:600;cursor:pointer;background:var(--parchment);color:#888;border:none;transition:all .15s;}
+.auth-tab.active{background:var(--ink);color:#fff;}
+.auth-form{display:flex;flex-direction:column;gap:.85rem;}
+.auth-form input{padding:.7rem .9rem;border:1.5px solid var(--border);border-radius:7px;font-size:.92rem;font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);width:100%;}
+.auth-form input:focus{outline:none;border-color:var(--steel);}
+.auth-form input.err{border-color:var(--red);}
+.auth-err{font-size:.77rem;color:var(--red);min-height:1em;}
+.auth-btn{padding:.72rem;color:#fff;border:none;border-radius:7px;font-size:.92rem;font-weight:600;cursor:pointer;transition:background .15s;width:100%;}
+.auth-btn.red{background:var(--red);}.auth-btn.red:hover{background:#a93226;}
+.auth-btn.blue{background:var(--steel);}.auth-btn.blue:hover{background:#3b5a8a;}
+.auth-divider{text-align:center;font-size:.78rem;color:#ccc;margin:.1rem 0;}
+.auth-guest{background:none;border:none;color:#aaa;font-size:.8rem;cursor:pointer;text-decoration:underline;margin-top:.2rem;}
+
+/* ── NAV ────────────────────────────────────── */
 nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:54px;border-bottom:3px solid var(--gold);}
 .nbrand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--gold);text-decoration:none;}
 .nlinks{display:flex;gap:.15rem;align-items:center;}
 .nlinks a{color:#ccc;text-decoration:none;font-size:.82rem;font-weight:500;padding:.35rem .7rem;border-radius:4px;transition:background .15s,color .15s;}
-.nlinks a:hover,.nlinks a.on{background:var(--gold);color:var(--ink);}
-.nuser{display:flex;align-items:center;gap:.6rem;font-size:.82rem;color:#ccc;}
+.nlinks a:hover,.nlinks a.active{background:var(--gold);color:var(--ink);}
+.nav-right{display:flex;align-items:center;gap:.6rem;}
 .nav-av{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;}
-.logbtn{background:none;border:1px solid #555;color:#aaa;padding:.25rem .6rem;border-radius:4px;cursor:pointer;font-size:.75rem;}
-.logbtn:hover{border-color:#aaa;color:#fff;}
+.nav-name{font-size:.82rem;color:#ccc;}
+.nav-out{background:none;border:1px solid #555;color:#aaa;padding:.25rem .6rem;border-radius:4px;cursor:pointer;font-size:.75rem;}
+.nav-out:hover{border-color:#aaa;color:#fff;}
+.nav-signin{background:none;border:1px solid var(--gold);color:var(--gold);padding:.28rem .7rem;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;}
+.nav-signin:hover{background:var(--gold);color:var(--ink);}
+.nav-register{background:var(--red);color:#fff;padding:.3rem .7rem;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;border:none;}
+.nav-register:hover{background:#a93226;}
 .ham{display:none;background:none;border:none;cursor:pointer;color:#fff;font-size:1.3rem;}
-/* HERO */
+
+/* ── HERO ───────────────────────────────────── */
 #home{background:linear-gradient(135deg,var(--ink) 0%,#2d3a6b 100%);color:#fff;text-align:center;padding:4.5rem 2rem 3.5rem;position:relative;overflow:hidden;}
 #home::before{content:'★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';position:absolute;top:1rem;left:50%;transform:translateX(-50%);color:var(--gold);font-size:.8rem;letter-spacing:.5em;opacity:.6;white-space:nowrap;}
 .hbrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
-.htitle{font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,3.6rem);font-weight:900;line-height:1.1;margin-bottom:.75rem;}
-.htitle span{color:var(--gold);}
+.htit{font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,3.6rem);font-weight:900;line-height:1.1;margin-bottom:.75rem;}
+.htit span{color:var(--gold);}
 .hsub{font-size:1rem;color:#bbc4d8;max-width:500px;margin:0 auto 1.75rem;}
 .hstats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;}
 .hstat .num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--gold);}
 .hstat .lbl{font-size:.72rem;color:#99a8c0;text-transform:uppercase;letter-spacing:.08em;}
-/* BTNS */
+
+/* ── COMMON ─────────────────────────────────── */
 .btn{display:inline-block;padding:.6rem 1.3rem;border-radius:6px;font-size:.88rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none;}
 .btn-r{background:var(--red);color:#fff;}.btn-r:hover{background:#a93226;}
 .btn-s{background:var(--steel);color:#fff;}
 .btn-g{background:transparent;color:var(--ink);border:2px solid var(--border);}.btn-g:hover{border-color:var(--steel);color:var(--steel);}
-.div{border:none;border-top:2px solid var(--border);margin:0 auto;max-width:1060px;}
-/* SECTION HEADERS */
+.divider{border:none;border-top:2px solid var(--border);margin:0 auto;max-width:1060px;}
 .sh{text-align:center;margin-bottom:2rem;}
 .sey{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem;}
 .stit{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;}
-/* SEARCH */
+
+/* ── SEARCH ─────────────────────────────────── */
 .sbw{display:flex;gap:.75rem;max-width:640px;margin:0 auto 1.5rem;flex-wrap:wrap;}
 .sb{flex:1;padding:.65rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem;font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);min-width:200px;}
 .sb:focus{outline:none;border-color:var(--steel);}
 .fchips{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.5rem;}
 .chip{padding:.3rem .85rem;border-radius:99px;border:1.5px solid var(--border);font-size:.78rem;font-weight:600;cursor:pointer;background:var(--cream);color:#666;transition:all .15s;}
 .chip:hover{border-color:var(--steel);color:var(--steel);}
-.chip.on{background:var(--steel);border-color:var(--steel);color:#fff;}
-/* LESSONS */
+.chip.active{background:var(--steel);border-color:var(--steel);color:#fff;}
+
+/* ── LESSON CARDS ───────────────────────────── */
 .lgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.2rem;}
 .lcard{background:var(--cream);border:1.5px solid var(--border);border-radius:10px;padding:1.4rem;cursor:pointer;transition:box-shadow .2s,transform .2s;position:relative;}
 .lcard:hover{box-shadow:var(--shadow);transform:translateY(-2px);}
@@ -78,9 +110,10 @@ nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-i
 .ltags{display:flex;gap:.35rem;flex-wrap:wrap;}
 .tag{font-size:.7rem;padding:.18rem .5rem;border-radius:99px;background:var(--mist);color:var(--steel);font-weight:500;}
 .nores{text-align:center;color:#aaa;padding:2rem;font-size:.92rem;}
-/* MODAL */
-.mov{display:none;position:fixed;inset:0;background:rgba(26,26,46,.78);z-index:200;align-items:flex-start;justify-content:center;padding:1.5rem;overflow-y:auto;}
-.mov.on{display:flex;}
+
+/* ── LESSON MODAL ───────────────────────────── */
+#lmov{display:none;position:fixed;inset:0;background:rgba(26,26,46,.78);z-index:700;align-items:flex-start;justify-content:center;padding:1.5rem;overflow-y:auto;}
+#lmov.show{display:flex;}
 .mbox{background:var(--cream);border-radius:14px;padding:2rem;max-width:720px;width:100%;position:relative;margin:auto;}
 .mcl{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.3rem;cursor:pointer;color:#888;}
 .mera{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--steel);margin-bottom:.35rem;}
@@ -94,8 +127,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-i
 .mbody ul{padding-left:1.3rem;margin-bottom:.9rem;}
 .mbody li{margin-bottom:.35rem;}
 .mbody a{color:var(--steel);font-weight:600;}
-.mres{margin-top:1.5rem;padding-top:1.2rem;border-top:1.5px solid var(--border);}
-.mrestit{font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:#888;margin-bottom:.75rem;}
+.mrestit{font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:#888;margin:.75rem 0 .5rem;}
 .rlinks{display:flex;flex-direction:column;gap:.4rem;}
 .rl{display:flex;align-items:center;gap:.6rem;padding:.55rem .85rem;border:1.5px solid var(--border);border-radius:7px;text-decoration:none;color:var(--ink);font-size:.85rem;transition:all .15s;background:var(--cream);}
 .rl:hover{border-color:var(--steel);background:var(--mist);}
@@ -103,11 +135,12 @@ nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-i
 .rl-lb{font-weight:600;flex:1;}
 .rl-tp{font-size:.7rem;color:#888;}
 .mcta{margin-top:1.5rem;padding-top:1.2rem;border-top:1.5px solid var(--border);display:flex;gap:.75rem;flex-wrap:wrap;}
-/* QUIZ */
+
+/* ── QUIZ ───────────────────────────────────── */
 .qtg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem;margin-bottom:1.75rem;}
 .tbtn{padding:.8rem .5rem;border-radius:8px;border:2px solid var(--border);background:var(--cream);cursor:pointer;font-size:.85rem;font-weight:600;text-align:center;transition:all .15s;color:var(--ink);}
 .tbtn:hover{border-color:var(--steel);color:var(--steel);}
-.tbtn.on{border-color:var(--red);background:var(--red);color:#fff;}
+.tbtn.active{border-color:var(--red);background:var(--red);color:#fff;}
 .tic{font-size:1.4rem;display:block;margin-bottom:.25rem;}
 .qpbw{background:var(--border);border-radius:99px;height:5px;margin-bottom:1.25rem;overflow:hidden;}
 .qpb{background:var(--red);height:100%;border-radius:99px;transition:width .3s;}
@@ -127,7 +160,8 @@ nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-i
 .rb-g{background:#fff4cc;color:#a07000;border:1px solid var(--gold);}
 .rb-s{background:#f0f0f0;color:#555;border:1px solid #bbb;}
 .rb-b{background:#fdf0e6;color:#8b5e3c;border:1px solid #c9956a;}
-/* TIMELINE */
+
+/* ── TIMELINE ───────────────────────────────── */
 #tls{background:var(--ink);color:#e8e0d0;padding:4rem 2rem;}
 .tl{position:relative;padding-left:2.5rem;max-width:760px;margin:0 auto;}
 .tl::before{content:'';position:absolute;left:.75rem;top:0;bottom:0;width:2px;background:var(--gold);opacity:.35;}
@@ -138,8 +172,9 @@ nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-i
 .tltit{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#e8e0d0;}
 .tlde{font-size:.84rem;color:#99a8c0;margin-top:.15rem;line-height:1.5;}
 .tlx{display:none;margin-top:.5rem;padding:.75rem 1rem;background:rgba(255,255,255,.05);border-radius:6px;font-size:.83rem;color:#bbc4d8;border-left:3px solid var(--gold);line-height:1.6;}
-.tli.on .tlx{display:block;}
-/* DASHBOARD */
+.tli.open .tlx{display:block;}
+
+/* ── DASHBOARD ──────────────────────────────── */
 #db{background:var(--parchment);padding:4rem 2rem;}
 .dg{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;max-width:1060px;margin:0 auto;}
 .dc{background:var(--cream);border:1.5px solid var(--border);border-radius:10px;padding:1.3rem;}
@@ -149,9 +184,9 @@ nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-i
 .xpr{display:flex;justify-content:space-between;font-size:.78rem;color:#777;margin-bottom:.35rem;}
 .xpbw{background:var(--border);border-radius:99px;height:7px;overflow:hidden;}
 .xpb{background:linear-gradient(90deg,var(--gold),var(--red));height:100%;border-radius:99px;transition:width .5s;}
-.bg{display:flex;flex-wrap:wrap;gap:.5rem;}
+.bgrd{display:flex;flex-wrap:wrap;gap:.5rem;}
 .bi{display:flex;flex-direction:column;align-items:center;gap:.15rem;padding:.45rem .6rem;border-radius:8px;border:1.5px solid var(--border);font-size:.68rem;font-weight:600;color:#aaa;min-width:60px;text-align:center;}
-.bi.on{border-color:var(--gold);color:var(--ink);background:#fff9e6;}
+.bi.earned{border-color:var(--gold);color:var(--ink);background:#fff9e6;}
 .bic{font-size:1.3rem;}
 .al{list-style:none;}
 .al li{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.83rem;}
@@ -167,7 +202,8 @@ nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-i
 .tpbw{flex:1;background:var(--border);border-radius:99px;height:6px;overflow:hidden;}
 .tpb{background:var(--steel);height:100%;border-radius:99px;transition:width .5s;}
 .tpp{width:32px;text-align:right;font-size:.75rem;color:#888;}
-/* SCHEDULE */
+
+/* ── SCHEDULE ───────────────────────────────── */
 #sc{padding:4rem 2rem;}
 .sfg{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
 .fg{display:flex;flex-direction:column;gap:.25rem;}
@@ -183,7 +219,8 @@ label{font-size:.8rem;font-weight:600;color:#555;}
 .sime{color:#888;font-size:.78rem;}
 .sbg{font-size:.7rem;padding:.18rem .55rem;border-radius:99px;background:var(--mist);color:var(--steel);font-weight:600;}
 .rn{font-size:.78rem;color:#888;margin-top:.75rem;padding:.65rem .85rem;background:var(--parchment);border-radius:6px;border-left:3px solid var(--gold);}
-/* RESOURCES */
+
+/* ── RESOURCES ──────────────────────────────── */
 #res{padding:3.5rem 2rem;}
 .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.9rem;}
 .rc{padding:1.1rem;border-radius:10px;border:1.5px solid var(--border);background:var(--cream);text-decoration:none;color:var(--ink);transition:box-shadow .2s,transform .2s;display:block;}
@@ -192,43 +229,95 @@ label{font-size:.8rem;font-weight:600;color:#555;}
 .rt{font-weight:700;font-size:.92rem;margin-bottom:.25rem;}
 .rd{font-size:.8rem;color:#666;}
 .rty{display:inline-block;margin-top:.5rem;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--steel);}
+
+/* ── FOOTER / TOAST ─────────────────────────── */
 footer{background:var(--ink);color:#99a8c0;text-align:center;padding:1.75rem;font-size:.8rem;border-top:3px solid var(--gold);}
 footer strong{color:var(--gold);}
-#toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;background:var(--ink);color:#fff;padding:.7rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:500;border-left:4px solid var(--gold);transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none;}
-#toast.on{transform:translateY(0);opacity:1;}
-@media(max-width:640px){.nlinks{display:none;flex-direction:column;position:absolute;top:54px;left:0;right:0;background:var(--ink);padding:.75rem;gap:.3rem;z-index:99;}.nlinks.open{display:flex;}.ham{display:block;}.dg{grid-template-columns:1fr;}.sfg{grid-template-columns:1fr;}.nuser span{display:none;}}
-</style></head><body>
-<div id="auth">
-  <div class="abox">
-    <div class="abrand">US History Help</div>
-    <div class="atag">Learn the past, shape the future</div>
-    <div class="atabs">
-      <button class="atab on" id="tli" onclick="swTab('li')">Sign In</button>
-      <button class="atab" id="tsu" onclick="swTab('su')">Create Account</button>
-    </div>
-    <div id="fli" class="af">
-      <div><input type="email" id="li-em" placeholder="Email address" oninput="clrE()"><p class="aerr" id="li-em-e"></p></div>
-      <div><input type="password" id="li-pw" placeholder="Password" oninput="clrE()" onkeydown="if(event.key==='Enter')doLI()"><p class="aerr" id="li-pw-e"></p></div>
-      <p class="aerr" id="li-ge"></p>
-      <button class="abtn red" onclick="doLI()">Sign In &rarr;</button>
-      <div class="adiv">&mdash; or &mdash;</div>
-      <button class="abtn blue" onclick="doDemo()">Try Demo Account</button>
-    </div>
-    <div id="fsu" class="af" style="display:none">
-      <div><input type="text" id="su-nm" placeholder="Your name" oninput="clrE()"><p class="aerr" id="su-nm-e"></p></div>
-      <div><input type="email" id="su-em" placeholder="Email address" oninput="clrE()"><p class="aerr" id="su-em-e"></p></div>
-      <div><input type="password" id="su-pw" placeholder="Password (min 6 chars)" oninput="clrE()"><p class="aerr" id="su-pw-e"></p></div>
-      <div><input type="password" id="su-p2" placeholder="Confirm password" oninput="clrE()" onkeydown="if(event.key==='Enter')doSU()"><p class="aerr" id="su-p2-e"></p></div>
-      <p class="aerr" id="su-ge"></p>
-      <button class="abtn red" onclick="doSU()">Create Account &rarr;</button>
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:1000;background:var(--ink);color:#fff;padding:.7rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:500;border-left:4px solid var(--gold);transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none;}
+#toast.show{transform:translateY(0);opacity:1;}
+
+@media(max-width:640px){
+  .nlinks{display:none;flex-direction:column;position:absolute;top:54px;left:0;right:0;background:var(--ink);padding:.75rem;gap:.3rem;z-index:99;}
+  .nlinks.open{display:flex;}
+  .ham{display:block;}
+  .dg{grid-template-columns:1fr;}
+  .sfg{grid-template-columns:1fr;}
+  .nav-name{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- GATE POPUP -->
+<div id="gate-popup">
+  <div class="gate-box">
+    <button class="gate-close" onclick="closeGate()">&times;</button>
+    <div class="gate-icon" id="gate-icon">🔒</div>
+    <div class="gate-title" id="gate-title">Sign in to continue</div>
+    <p class="gate-msg" id="gate-msg">Create a free account to save your progress, earn badges, and track scores.</p>
+    <div class="gate-actions">
+      <button class="gate-btn primary" onclick="gateGoAuth('li')">Sign In &rarr;</button>
+      <button class="gate-btn secondary" onclick="gateGoAuth('su')">Create Free Account &rarr;</button>
+      <button class="gate-btn demo" onclick="gateDemo()">&#9654;&nbsp; Try Demo Account</button>
+      <button class="gate-skip" onclick="closeGate()">No thanks, keep browsing</button>
     </div>
   </div>
 </div>
-<div id="app" style="display:none">
+
+<!-- AUTH MODAL -->
+<div id="auth-modal">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuth()">&times;</button>
+    <div class="auth-brand">US History Help</div>
+    <div class="auth-tag">Learn the past, shape the future</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-li" onclick="swTab('li')">Sign In</button>
+      <button class="auth-tab" id="tab-su" onclick="swTab('su')">Create Account</button>
+    </div>
+    <div id="form-li" class="auth-form">
+      <div>
+        <input type="email" id="li-em" placeholder="Email address" oninput="clrErr()">
+        <p class="auth-err" id="li-em-e"></p>
+      </div>
+      <div>
+        <input type="password" id="li-pw" placeholder="Password" oninput="clrErr()" onkeydown="if(event.key==='Enter')doLI()">
+        <p class="auth-err" id="li-pw-e"></p>
+      </div>
+      <p class="auth-err" id="li-ge"></p>
+      <button class="auth-btn red" onclick="doLI()">Sign In &rarr;</button>
+      <div class="auth-divider">&mdash; or &mdash;</div>
+      <button class="auth-btn blue" onclick="doDemo()">Try Demo Account</button>
+      <button class="auth-guest" onclick="closeAuth()">Continue browsing as guest</button>
+    </div>
+    <div id="form-su" class="auth-form" style="display:none">
+      <div>
+        <input type="text" id="su-nm" placeholder="Your name" oninput="clrErr()">
+        <p class="auth-err" id="su-nm-e"></p>
+      </div>
+      <div>
+        <input type="email" id="su-em" placeholder="Email address" oninput="clrErr()">
+        <p class="auth-err" id="su-em-e"></p>
+      </div>
+      <div>
+        <input type="password" id="su-pw" placeholder="Password (min 6 characters)" oninput="clrErr()">
+        <p class="auth-err" id="su-pw-e"></p>
+      </div>
+      <div>
+        <input type="password" id="su-p2" placeholder="Confirm password" oninput="clrErr()" onkeydown="if(event.key==='Enter')doSU()">
+        <p class="auth-err" id="su-p2-e"></p>
+      </div>
+      <p class="auth-err" id="su-ge"></p>
+      <button class="auth-btn red" onclick="doSU()">Create Account &rarr;</button>
+      <button class="auth-guest" onclick="closeAuth()">Continue browsing as guest</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
 <nav>
   <a class="nbrand" href="#home">US History Help</a>
   <div class="nlinks" id="nl">
-    <a href="#home" class="on" onclick="setAct(this)">Home</a>
+    <a href="#home" class="active" onclick="setAct(this)">Home</a>
     <a href="#lessons" onclick="setAct(this)">Lessons</a>
     <a href="#quiz" onclick="setAct(this)">Quiz</a>
     <a href="#tls" onclick="setAct(this)">Timeline</a>
@@ -236,17 +325,25 @@ footer strong{color:var(--gold);}
     <a href="#sc" onclick="setAct(this)">Schedule</a>
     <a href="#res" onclick="setAct(this)">Resources</a>
   </div>
-  <div class="nuser">
-    <div class="nav-av" id="nav-av">?</div>
-    <span id="nav-nm">User</span>
-    <button class="logbtn" onclick="doOut()">Sign out</button>
+  <div class="nav-right">
+    <div id="nav-guest" style="display:flex;gap:.5rem;align-items:center">
+      <button class="nav-signin" onclick="openAuth('li')">Sign In</button>
+      <button class="nav-register" onclick="openAuth('su')">Register</button>
+    </div>
+    <div id="nav-user" style="display:none;align-items:center;gap:.6rem">
+      <div class="nav-av" id="nav-av">?</div>
+      <span class="nav-name" id="nav-nm">User</span>
+      <button class="nav-out" onclick="doOut()">Sign out</button>
+    </div>
   </div>
   <button class="ham" onclick="document.getElementById('nl').classList.toggle('open')">&#9776;</button>
 </nav>
+
+<!-- HERO -->
 <section id="home">
   <p class="hbrow">Free &middot; Interactive &middot; Student-Built</p>
-  <h1 class="htitle">Learn the Past,<br><span>Shape the Future</span></h1>
-  <p class="hsub">Quizzes, timelines, enriched lessons with external references, and personal progress tracking &mdash; all in one place.</p>
+  <h1 class="htit">Learn the Past,<br><span>Shape the Future</span></h1>
+  <p class="hsub">Quizzes, timelines, enriched lessons, and personal progress tracking. Browse freely &mdash; sign in to save your progress.</p>
   <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap">
     <a href="#lessons" class="btn btn-r">Browse Lessons &rarr;</a>
     <a href="#quiz" class="btn btn-g" style="color:#fff;border-color:rgba(255,255,255,.3)">Take a Quiz</a>
@@ -258,36 +355,53 @@ footer strong{color:var(--gold);}
     <div class="hstat"><div class="num">Free</div><div class="lbl">Always</div></div>
   </div>
 </section>
-<hr class="div">
+
+<hr class="divider">
+
+<!-- LESSONS -->
 <section id="lessons" style="padding:3.5rem 2rem">
 <div style="max-width:1060px;margin:0 auto">
-  <div class="sh"><p class="sey">Study Guides</p><h2 class="stit">Lessons</h2>
-  <p style="color:#666;margin-top:.4rem;font-size:.92rem">Click any lesson to read the full guide, explore key figures, and access curated external resources.</p></div>
+  <div class="sh">
+    <p class="sey">Study Guides</p>
+    <h2 class="stit">Lessons</h2>
+    <p style="color:#666;margin-top:.4rem;font-size:.92rem">Click any lesson to read the full guide, explore key figures, and access curated external resources.</p>
+  </div>
   <div class="sbw"><input type="text" class="sb" id="lsrch" placeholder="&#128269; Search lessons, key figures, topics&hellip;" oninput="fltL()"></div>
   <div class="fchips" id="fchips"></div>
   <div class="lgrid" id="lgrid"></div>
-  <p class="nores" id="nores" style="display:none">No lessons match your search. Try a different keyword.</p>
+  <p class="nores" id="nores" style="display:none">No lessons match your search.</p>
 </div>
 </section>
-<div class="mov" id="lmov">
+
+<!-- LESSON MODAL -->
+<div id="lmov">
   <div class="mbox">
     <button class="mcl" onclick="clsMov()">&times;</button>
     <p class="mera" id="m-era"></p>
     <h2 class="mtit" id="m-tit"></h2>
     <div id="m-kf"></div>
     <div class="mbody" id="m-body"></div>
-    <div class="mres"><div class="mrestit">External Resources</div><div class="rlinks" id="m-res"></div></div>
+    <div id="m-res-wrap" style="margin-top:1.5rem;padding-top:1.2rem;border-top:1.5px solid var(--border)">
+      <div class="mrestit">External Resources</div>
+      <div class="rlinks" id="m-res"></div>
+    </div>
     <div class="mcta">
       <button class="btn btn-r" onclick="goQ()">Take the Quiz &rarr;</button>
       <button class="btn btn-g" onclick="clsMov()">Back to Lessons</button>
     </div>
   </div>
 </div>
-<hr class="div">
+
+<hr class="divider">
+
+<!-- QUIZ -->
 <section id="quiz" style="padding:3.5rem 2rem;background:var(--parchment)">
 <div style="max-width:760px;margin:0 auto">
-  <div class="sh"><p class="sey">Test Yourself</p><h2 class="stit">Quick Quiz</h2>
-  <p style="color:#666;margin-top:.4rem;font-size:.92rem">Pick a topic and answer 5 questions. Results save to your personal dashboard.</p></div>
+  <div class="sh">
+    <p class="sey">Test Yourself</p>
+    <h2 class="stit">Quick Quiz</h2>
+    <p style="color:#666;margin-top:.4rem;font-size:.92rem">Pick a topic and answer 5 questions. Sign in to save your scores.</p>
+  </div>
   <div id="tpick">
     <div class="qtg">
       <button class="tbtn" onclick="selT(this,'colonial')"><span class="tic">&#9875;</span>Colonial Era</button>
@@ -324,7 +438,10 @@ footer strong{color:var(--gold);}
   </div>
 </div>
 </section>
-<hr class="div">
+
+<hr class="divider">
+
+<!-- TIMELINE -->
 <section id="tls">
 <div style="max-width:1060px;margin:0 auto">
   <div class="sh" style="margin-bottom:2rem">
@@ -335,11 +452,17 @@ footer strong{color:var(--gold);}
   <div class="tl" id="tlc"></div>
 </div>
 </section>
-<hr class="div" style="border-color:#2a2a4a">
+
+<hr class="divider" style="border-color:#2a2a4a">
+
+<!-- DASHBOARD -->
 <section id="db">
 <div style="max-width:1060px;margin:0 auto">
-  <div class="sh"><p class="sey">Your Progress</p><h2 class="stit">Dashboard</h2>
-  <p style="color:#666;margin-top:.4rem;font-size:.92rem">Progress is saved to your account &mdash; pick up where you left off anytime.</p></div>
+  <div class="sh">
+    <p class="sey">Your Progress</p>
+    <h2 class="stit">Dashboard</h2>
+    <p style="color:#666;margin-top:.4rem;font-size:.92rem">Progress is saved to your account &mdash; pick up where you left off anytime.</p>
+  </div>
   <div class="dg">
     <div class="dc"><div class="dct">Study Streak &#128293;</div><div class="sn" id="dsn">0</div><div class="sl">day streak</div></div>
     <div class="dc">
@@ -349,7 +472,7 @@ footer strong{color:var(--gold);}
       <p style="font-size:.75rem;color:#aaa;margin-top:.4rem" id="dxn">0 XP to next level</p>
     </div>
     <div class="dc" style="grid-column:1/-1"><div class="dct">Topic Progress (Best Quiz Score)</div><div class="tpr" id="dtpr"></div></div>
-    <div class="dc" style="grid-column:1/-1"><div class="dct">Badges Earned</div><div class="bg" id="dbg"></div></div>
+    <div class="dc" style="grid-column:1/-1"><div class="dct">Badges Earned</div><div class="bgrd" id="dbg"></div></div>
     <div class="dc">
       <div class="dct">Log Study Session</div>
       <div class="lf">
@@ -365,11 +488,17 @@ footer strong{color:var(--gold);}
   </div>
 </div>
 </section>
-<hr class="div">
+
+<hr class="divider">
+
+<!-- SCHEDULE -->
 <section id="sc">
 <div style="max-width:1060px;margin:0 auto">
-  <div class="sh"><p class="sey">Peer Tutoring</p><h2 class="stit">Schedule a Session</h2>
-  <p style="color:#666;margin-top:.4rem;font-size:.92rem">Book a peer tutoring or group study session. All required fields are validated.</p></div>
+  <div class="sh">
+    <p class="sey">Peer Tutoring</p>
+    <h2 class="stit">Schedule a Session</h2>
+    <p style="color:#666;margin-top:.4rem;font-size:.92rem">Book a peer tutoring or group study session. Sign in to save your bookings.</p>
+  </div>
   <div style="max-width:620px;margin:0 auto">
     <div class="sfg">
       <div class="fg"><label>Your Name</label><input type="text" id="s-nm" class="fi" placeholder="e.g. Alex Johnson"><p class="fe" id="e-nm"></p></div>
@@ -382,31 +511,40 @@ footer strong{color:var(--gold);}
     </div>
     <div style="margin-top:1.1rem"><button class="btn btn-r" style="width:100%;padding:.75rem" onclick="subSc()">Request Session &rarr;</button></div>
     <div class="ssucc" id="ssucc">&#10003; Session requested! It appears in your upcoming sessions below.</div>
-    <p class="rn">&#128231; To send real email reminders, connect <strong>EmailJS</strong> (free) &mdash; ask a parent or teacher to help set it up. Sessions are saved to your account in the meantime.</p>
+    <p class="rn">&#128231; To enable real email reminders, connect <strong>EmailJS</strong> (free) — sessions are saved to your account in the meantime.</p>
   </div>
   <div style="max-width:620px;margin:1.5rem auto 0" id="sclist"></div>
 </div>
 </section>
-<hr class="div">
+
+<hr class="divider">
+
+<!-- RESOURCES -->
 <section id="res">
 <div style="max-width:1060px;margin:0 auto">
   <div class="sh"><p class="sey">External Tools</p><h2 class="stit">Resources</h2></div>
   <div class="rg">
     <a href="https://www.khanacademy.org/humanities/us-history" target="_blank" class="rc"><div class="ri">&#127891;</div><div class="rt">Khan Academy &mdash; US History</div><div class="rd">Free video lessons covering all major eras.</div><span class="rty">Video Lessons</span></a>
-    <a href="https://www.history.com/topics/us-history" target="_blank" class="rc"><div class="ri">&#128250;</div><div class="rt">History.com</div><div class="rd">Articles, videos, and primary sources on key events.</div><span class="rty">Reference</span></a>
-    <a href="https://www.loc.gov/classroom-materials/" target="_blank" class="rc"><div class="ri">&#127963;&#65039;</div><div class="rt">Library of Congress</div><div class="rd">Primary sources, documents, photos, classroom materials.</div><span class="rty">Primary Sources</span></a>
-    <a href="https://www.archives.gov/founding-docs" target="_blank" class="rc"><div class="ri">&#128220;</div><div class="rt">National Archives</div><div class="rd">Declaration, Constitution, Bill of Rights &mdash; original texts.</div><span class="rty">Founding Docs</span></a>
+    <a href="https://www.history.com/topics/us-history" target="_blank" class="rc"><div class="ri">&#128250;</div><div class="rt">History.com</div><div class="rd">Articles, videos, and primary sources.</div><span class="rty">Reference</span></a>
+    <a href="https://www.loc.gov/classroom-materials/" target="_blank" class="rc"><div class="ri">&#127963;&#65039;</div><div class="rt">Library of Congress</div><div class="rd">Primary sources, documents, photos.</div><span class="rty">Primary Sources</span></a>
+    <a href="https://www.archives.gov/founding-docs" target="_blank" class="rc"><div class="ri">&#128220;</div><div class="rt">National Archives</div><div class="rd">Declaration, Constitution, Bill of Rights.</div><span class="rty">Founding Docs</span></a>
     <a href="https://www.pbs.org/history/" target="_blank" class="rc"><div class="ri">&#127909;</div><div class="rt">PBS American History</div><div class="rd">Documentaries and articles on all major periods.</div><span class="rty">Documentaries</span></a>
-    <a href="https://www.smithsonianmag.com/category/history/" target="_blank" class="rc"><div class="ri">&#128300;</div><div class="rt">Smithsonian Magazine</div><div class="rd">In-depth historical articles from America's museum.</div><span class="rty">Articles</span></a>
+    <a href="https://www.smithsonianmag.com/category/history/" target="_blank" class="rc"><div class="ri">&#128300;</div><div class="rt">Smithsonian Magazine</div><div class="rd">In-depth historical articles.</div><span class="rty">Articles</span></a>
     <a href="https://quizlet.com/subject/us-history/" target="_blank" class="rc"><div class="ri">&#127183;</div><div class="rt">Quizlet &mdash; US History</div><div class="rd">Flashcard sets and study modes.</div><span class="rty">Flashcards</span></a>
     <a href="https://www.nps.gov/subjects/tellingallamericansstories/index.htm" target="_blank" class="rc"><div class="ri">&#127966;&#65039;</div><div class="rt">National Park Service</div><div class="rd">Historic sites and the stories behind them.</div><span class="rty">Exploration</span></a>
   </div>
 </div>
 </section>
-<footer><p><strong>US History Help</strong> &mdash; Built for students, by a student.</p><p style="margin-top:.3rem">FBLA Website Design &middot; <em>&ldquo;Learn the past to fix the future&rdquo;</em></p></footer>
-</div>
+
+<footer>
+  <p><strong>US History Help</strong> &mdash; Built for students, by a student.</p>
+  <p style="margin-top:.3rem">FBLA Website Design &middot; <em>&ldquo;Learn the past to fix the future&rdquo;</em></p>
+</footer>
+
 <div id="toast"></div>
+
 <script>
+
 // DATA - LESSONS
 const LS=[
 {era:"Colonial Era (1607-1763)",title:"Colonial America: Seeds of a Nation",summary:"How thirteen very different colonies developed distinct economies, religious traditions, and ideas of self-governance that would eventually unite against British rule.",tags:["Government","Economy","Religion","Slavery","Native Americans"],topic:"colonial",kf:["John Smith","William Bradford","Roger Williams","Anne Hutchinson","William Penn","John Winthrop"],
@@ -428,7 +566,10 @@ res:[{i:"🏛️",l:"National WWII Museum: Topics and Articles",u:"https://www.n
 body:`<h4>Origins: Why Two Allies Became Rivals</h4><p>The US and Soviet Union cooperated to defeat Hitler but had incompatible visions for the postwar world. Diplomat George Kennan articulated the US response in his 1947 "X Article": <strong>containment</strong> — preventing Soviet expansion rather than risking nuclear war by rolling it back. The <strong>Truman Doctrine (1947)</strong> pledged US support to "free peoples resisting subjugation," starting with Greece and Turkey. The <strong>Marshall Plan (1948)</strong> invested $13 billion to rebuild Western European economies against communist appeal.</p><h4>Hot Wars in a Cold War</h4><p><strong>Korean War (1950-53):</strong> North Korea's invasion of South Korea tested containment. After three years and 36,000 American deaths, an armistice restored the pre-war border. Korea established the model for "limited war" — fighting for political objectives rather than total victory.</p><p><strong>McCarthyism (1950-54):</strong> Senator McCarthy claimed the State Department was infiltrated by communists. His televised Army-McCarthy hearings exposed him as a bully — attorney Joseph Welch's challenge, "Have you no sense of decency?" turned public opinion. McCarthy was censured, but the Red Scare destroyed careers and chilled free speech.</p><p><strong>Cuban Missile Crisis (October 1962):</strong> Soviet missiles in Cuba created a 13-day standoff. Kennedy chose a naval "quarantine" over air strikes. Secret diplomacy produced agreement: Soviets removed Cuban missiles; US pledged no Cuba invasion and quietly removed missiles from Turkey. The crisis led to the Moscow-Washington hotline and Nuclear Test Ban Treaty.</p><p><strong>Vietnam War (1964-75):</strong> The Gulf of Tonkin Resolution gave LBJ authority to escalate without a formal war declaration. US troop levels peaked at 543,000. The Tet Offensive (January 1968) shattered public confidence in the war. After 58,000 American deaths and over 2 million Vietnamese, Saigon fell in April 1975.</p><h4>The Space Race</h4><p>Sputnik (October 1957) shocked America into investing in science education and creating NASA. Kennedy's 1961 challenge to land on the Moon by decade's end galvanized the Apollo program. Neil Armstrong's first steps on July 20, 1969 were watched by 600 million people worldwide.</p><h4>The Cold War's End (1985-1991)</h4><p>Gorbachev's glasnost and perestroika reforms inadvertently unleashed forces that overwhelmed the Soviet system. Reagan's military buildup had strained the Soviet economy. Democratic revolutions swept Eastern Europe. The <strong>Berlin Wall fell November 9, 1989</strong>. The Soviet Union dissolved December 25, 1991 — ending 44 years of Cold War.</p>`,
 res:[{i:"🎓",l:"Khan Academy: The Cold War",u:"https://www.khanacademy.org/humanities/us-history/postwar-era/cold-war",t:"Video Lessons"},{i:"📺",l:"PBS American Experience: Cold War Films",u:"https://www.pbs.org/wgbh/americanexperience/",t:"Documentaries"},{i:"🏛️",l:"Miller Center: Presidential Speeches",u:"https://millercenter.org/the-presidency/presidential-speeches",t:"Primary Sources"},{i:"📜",l:"NSA: Cold War Declassified Documents",u:"https://nsarchive.gwu.edu/",t:"Declassified Records"},{i:"🔬",l:"Smithsonian: Cold War America",u:"https://www.smithsonianmag.com/history/",t:"Articles"}]}
 ];
-</script><script>
+
+</script>
+<script>
+
 // QUIZ DATA
 const QD={
 colonial:[
@@ -504,233 +645,552 @@ const TLV=[
 {y:1964,t:"Civil Rights Act Signed",d:"President Johnson signed landmark legislation banning racial discrimination.",x:"The Act banned discrimination in public accommodations and employment. Combined with the Voting Rights Act of 1965, it dismantled the legal architecture of Jim Crow — though economic and social inequalities persisted."},
 {y:1969,t:"Apollo 11: Moon Landing",d:"Neil Armstrong and Buzz Aldrin became the first humans on the Moon.",x:"Armstrong's 'one small step' on July 20, 1969 was watched by 600 million people worldwide. It fulfilled Kennedy's 1961 challenge, won the Space Race, and remains one of humanity's greatest achievements."}
 ];
-</script><script>
-// AUTH
-let CU=null,ST=ds();
-function ds(){return{xp:0,streak:0,lastStudied:null,badges:[],activities:[],sessions:[],completedLessons:[],topicScores:{},qt:null,cq:0,score:0,qa:false};}
-function gU(){try{return JSON.parse(localStorage.getItem('ush_users')||'{}')}catch(e){return{}}}
-function sU(u){localStorage.setItem('ush_users',JSON.stringify(u))}
-function gUS(em){try{return JSON.parse(localStorage.getItem('ush_u_'+btoa(em))||'null')}catch(e){return null}}
-function sUS(em,s){localStorage.setItem('ush_u_'+btoa(em),JSON.stringify(s))}
-function hp(p){let h=0;for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h|=0;}return h.toString(36)}
 
-function swTab(t){
-  ['li','su'].forEach(x=>{
-    document.getElementById('t'+x).classList.toggle('on',x===t);
-    document.getElementById('f'+x).style.display=x===t?'flex':'none';
-  });clrE();
+</script>
+<script>
+// ── STATE ──────────────────────────────────────────────────────
+let CU = null;   // current user {e, n}
+let ST = ds();   // current user state
+let _pendingAction = null;  // action to fire after login
+
+function ds() {
+  return {xp:0,streak:0,lastStudied:null,badges:[],activities:[],sessions:[],
+          completedLessons:[],topicScores:{},qt:null,cq:0,score:0,qa:false};
 }
-function clrE(){['li-em-e','li-pw-e','li-ge','su-nm-e','su-em-e','su-pw-e','su-p2-e','su-ge'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent='';});}
 
-function doLI(){
-  const em=document.getElementById('li-em').value.trim(),pw=document.getElementById('li-pw').value;
-  let ok=true;
-  if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){document.getElementById('li-em-e').textContent='Enter a valid email.';ok=false;}
-  if(!pw){document.getElementById('li-pw-e').textContent='Enter your password.';ok=false;}
-  if(!ok)return;
-  const u=gU();
-  if(!u[em]){document.getElementById('li-ge').textContent='No account found. Please create one.';return;}
-  if(u[em].hash!==hp(pw)){document.getElementById('li-pw-e').textContent='Incorrect password.';return;}
-  loginOK(em,u[em].name);
+// ── LOCAL STORAGE HELPERS ──────────────────────────────────────
+function gU()  { try{return JSON.parse(localStorage.getItem('ush_users')||'{}')}catch(e){return{}} }
+function sU(u) { localStorage.setItem('ush_users',JSON.stringify(u)); }
+function gUS(em) { try{return JSON.parse(localStorage.getItem('ush_u_'+btoa(em))||'null')}catch(e){return null} }
+function sUS(em,s){ localStorage.setItem('ush_u_'+btoa(em),JSON.stringify(s)); }
+function hp(p) { let h=0;for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h|=0;}return h.toString(36); }
+function saveS(){ if(CU) sUS(CU.e, ST); }
+
+// ── NAV ────────────────────────────────────────────────────────
+function setAct(el) {
+  document.querySelectorAll('.nlinks a').forEach(a=>a.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('nl').classList.remove('open');
 }
-function doSU(){
-  const nm=document.getElementById('su-nm').value.trim(),em=document.getElementById('su-em').value.trim(),pw=document.getElementById('su-pw').value,p2=document.getElementById('su-p2').value;
-  let ok=true;
-  if(!nm){document.getElementById('su-nm-e').textContent='Please enter your name.';ok=false;}
-  if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){document.getElementById('su-em-e').textContent='Enter a valid email.';ok=false;}
-  if(!pw||pw.length<6){document.getElementById('su-pw-e').textContent='Password must be at least 6 characters.';ok=false;}
-  if(pw!==p2){document.getElementById('su-p2-e').textContent='Passwords do not match.';ok=false;}
-  if(!ok)return;
-  const u=gU();
-  if(u[em]){document.getElementById('su-ge').textContent='An account with this email already exists. Please sign in.';return;}
-  u[em]={name:nm,hash:hp(pw)};sU(u);loginOK(em,nm);
+
+// ── TOAST ──────────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
 }
-function doDemo(){const u=gU();if(!u['demo@ushistoryhelp.com']){u['demo@ushistoryhelp.com']={name:'Demo Student',hash:hp('demo123')};sU(u);}loginOK('demo@ushistoryhelp.com','Demo Student');}
 
-function loginOK(em,nm){
-  localStorage.setItem('ush_sess',JSON.stringify({e:em,n:nm}));
-  CU={e:em,n:nm};
-  const sv=gUS(em);ST=sv?{...ds(),...sv}:ds();
-  document.getElementById('auth').style.display='none';
-  document.getElementById('app').style.display='block';
-  document.getElementById('nav-av').textContent=nm.charAt(0).toUpperCase();
-  document.getElementById('nav-nm').textContent=nm.split(' ')[0];
-  initAll();
-  toast(sv?'Welcome back, '+nm.split(' ')[0]+'! 👋':'Welcome, '+nm.split(' ')[0]+'! Let\'s get started 🎉');
+// ── GATE POPUP ─────────────────────────────────────────────────
+function openGate(icon, title, msg, action) {
+  _pendingAction = action || null;
+  document.getElementById('gate-icon').textContent  = icon;
+  document.getElementById('gate-title').textContent = title;
+  document.getElementById('gate-msg').textContent   = msg;
+  document.getElementById('gate-popup').classList.add('show');
 }
-function doOut(){if(CU)sUS(CU.e,ST);localStorage.removeItem('ush_sess');CU=null;ST=ds();document.getElementById('app').style.display='none';document.getElementById('auth').style.display='flex';document.getElementById('li-em').value='';document.getElementById('li-pw').value='';}
-function saveS(){if(CU)sUS(CU.e,ST);}
 
-// NAV
-function setAct(el){document.querySelectorAll('.nlinks a').forEach(a=>a.classList.remove('on'));el.classList.add('on');document.getElementById('nl').classList.remove('open');}
+function closeGate() {
+  document.getElementById('gate-popup').classList.remove('show');
+  _pendingAction = null;
+}
 
-// TOAST
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),3000);}
+function gateGoAuth(tab) {
+  closeGate();
+  openAuth(tab);
+}
 
-// LESSONS
-let AE='all',MLT=null;
-function rndLessons(){
-  document.getElementById('fchips').innerHTML='<button class="chip on" onclick="setEra(this,\'all\')">All</button>'+
-    LS.map(l=>`<button class="chip" onclick="setEra(this,'${l.topic}')">${l.era.split('(')[0].trim()}</button>`).join('');
+function gateDemo() {
+  closeGate();
+  doDemo();
+}
+
+// Gate check — if logged in run action directly, else show popup
+function requireLogin(icon, title, msg, action) {
+  if (CU) { action && action(); return; }
+  openGate(icon, title, msg, action);
+}
+
+// ── AUTH MODAL ─────────────────────────────────────────────────
+function openAuth(tab) {
+  swTab(tab || 'li');
+  document.getElementById('auth-modal').classList.add('show');
+}
+
+function closeAuth() {
+  document.getElementById('auth-modal').classList.remove('show');
+}
+
+function swTab(t) {
+  document.getElementById('tab-li').classList.toggle('active', t==='li');
+  document.getElementById('tab-su').classList.toggle('active', t==='su');
+  document.getElementById('form-li').style.display = t==='li' ? 'flex' : 'none';
+  document.getElementById('form-su').style.display = t==='su' ? 'flex' : 'none';
+  clrErr();
+}
+
+function clrErr() {
+  ['li-em-e','li-pw-e','li-ge','su-nm-e','su-em-e','su-pw-e','su-p2-e','su-ge']
+    .forEach(id=>{ const e=document.getElementById(id); if(e) e.textContent=''; });
+}
+
+function doLI() {
+  const em = document.getElementById('li-em').value.trim();
+  const pw = document.getElementById('li-pw').value;
+  let ok = true;
+  if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { document.getElementById('li-em-e').textContent='Enter a valid email.'; ok=false; }
+  if (!pw) { document.getElementById('li-pw-e').textContent='Enter your password.'; ok=false; }
+  if (!ok) return;
+  const u = gU();
+  if (!u[em]) { document.getElementById('li-ge').textContent='No account found with this email. Please create one.'; return; }
+  if (u[em].hash !== hp(pw)) { document.getElementById('li-pw-e').textContent='Incorrect password.'; return; }
+  loginOK(em, u[em].name);
+}
+
+function doSU() {
+  const nm = document.getElementById('su-nm').value.trim();
+  const em = document.getElementById('su-em').value.trim();
+  const pw = document.getElementById('su-pw').value;
+  const p2 = document.getElementById('su-p2').value;
+  let ok = true;
+  if (!nm) { document.getElementById('su-nm-e').textContent='Please enter your name.'; ok=false; }
+  if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { document.getElementById('su-em-e').textContent='Enter a valid email.'; ok=false; }
+  if (!pw || pw.length < 6) { document.getElementById('su-pw-e').textContent='Password must be at least 6 characters.'; ok=false; }
+  if (pw !== p2) { document.getElementById('su-p2-e').textContent='Passwords do not match.'; ok=false; }
+  if (!ok) return;
+  const u = gU();
+  if (u[em]) { document.getElementById('su-ge').textContent='An account with this email already exists. Please sign in.'; return; }
+  u[em] = {name:nm, hash:hp(pw)};
+  sU(u);
+  loginOK(em, nm);
+}
+
+function doDemo() {
+  const u = gU();
+  if (!u['demo@ushistoryhelp.com']) {
+    u['demo@ushistoryhelp.com'] = {name:'Demo Student', hash:hp('demo123')};
+    sU(u);
+  }
+  loginOK('demo@ushistoryhelp.com', 'Demo Student');
+}
+
+function loginOK(em, nm) {
+  localStorage.setItem('ush_sess', JSON.stringify({e:em, n:nm}));
+  CU = {e:em, n:nm};
+  const sv = gUS(em);
+  ST = sv ? {...ds(), ...sv} : ds();
+  closeAuth();
+  // Update nav
+  document.getElementById('nav-guest').style.display = 'none';
+  document.getElementById('nav-user').style.display  = 'flex';
+  document.getElementById('nav-av').textContent = nm.charAt(0).toUpperCase();
+  document.getElementById('nav-nm').textContent = nm.split(' ')[0];
+  rndDB(); rndSc(); fltL();
+  const isNew = !sv;
+  toast(isNew ? 'Welcome, '+nm.split(' ')[0]+'! Ready to learn? \uD83C\uDF89' : 'Welcome back, '+nm.split(' ')[0]+'! \uD83D\uDC4B');
+  // Fire pending action if any
+  if (_pendingAction) {
+    const fn = _pendingAction;
+    _pendingAction = null;
+    setTimeout(fn, 300);
+  }
+}
+
+function doOut() {
+  if (CU) sUS(CU.e, ST);
+  localStorage.removeItem('ush_sess');
+  CU = null; ST = ds();
+  document.getElementById('nav-user').style.display  = 'none';
+  document.getElementById('nav-guest').style.display = 'flex';
+  document.getElementById('li-em').value = '';
+  document.getElementById('li-pw').value = '';
+  rndDB(); rndSc(); fltL();
+  toast('You have been signed out.');
+}
+
+// ── LESSONS ────────────────────────────────────────────────────
+let AE = 'all', MLT = null;
+
+function rndLessons() {
+  const chips = document.getElementById('fchips');
+  chips.innerHTML = '<button class="chip active" onclick="setEra(this,\'all\')">All</button>' +
+    LS.map(l => '<button class="chip" onclick="setEra(this,\''+l.topic+'\')">'+l.era.split('(')[0].trim()+'</button>').join('');
   fltL();
 }
-function setEra(b,e){AE=e;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));b.classList.add('on');fltL();}
-function fltL(){
-  const q=(document.getElementById('lsrch').value||'').toLowerCase();
-  const gr=document.getElementById('lgrid'),nr=document.getElementById('nores');
-  gr.innerHTML='';let cnt=0;
-  LS.forEach((l,i)=>{
-    if(AE!=='all'&&l.topic!==AE)return;
-    const tx=(l.title+' '+l.summary+' '+l.tags.join(' ')+' '+l.era+' '+(l.kf||[]).join(' ')).toLowerCase();
-    if(q&&!tx.includes(q))return;
-    cnt++;const done=(ST.completedLessons||[]).includes(i);
-    gr.innerHTML+=`<div class="lcard${done?' done':''}" onclick="openL(${i})"><div class="lera">${l.era}</div><div class="ltit">${l.title}</div><div class="lsum">${l.summary}</div><div class="ltags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
+
+function setEra(btn, era) {
+  AE = era;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  fltL();
+}
+
+function fltL() {
+  const q = (document.getElementById('lsrch').value || '').toLowerCase();
+  const gr = document.getElementById('lgrid');
+  const nr = document.getElementById('nores');
+  gr.innerHTML = ''; let cnt = 0;
+  LS.forEach((l, i) => {
+    if (AE !== 'all' && l.topic !== AE) return;
+    const tx = (l.title+' '+l.summary+' '+l.tags.join(' ')+' '+l.era+' '+(l.kf||[]).join(' ')).toLowerCase();
+    if (q && !tx.includes(q)) return;
+    cnt++;
+    const done = (ST.completedLessons||[]).includes(i);
+    gr.innerHTML += '<div class="lcard'+(done?' done':'')+'" onclick="openL('+i+')">'
+      +'<div class="lera">'+l.era+'</div>'
+      +'<div class="ltit">'+l.title+'</div>'
+      +'<div class="lsum">'+l.summary+'</div>'
+      +'<div class="ltags">'+l.tags.map(t=>'<span class="tag">'+t+'</span>').join('')+'</div>'
+      +'</div>';
   });
-  nr.style.display=cnt===0?'block':'none';
+  nr.style.display = cnt === 0 ? 'block' : 'none';
 }
-function openL(i){
-  const l=LS[i];MLT=l.topic;
-  document.getElementById('m-era').textContent=l.era;
-  document.getElementById('m-tit').textContent=l.title;
-  const kf=document.getElementById('m-kf');
-  kf.innerHTML=l.kf&&l.kf.length?'<p class="kflbl">Key Figures</p><div class="kfrow">'+l.kf.map(f=>`<span class="kfc">${f}</span>`).join('')+'</div>':'';
-  document.getElementById('m-body').innerHTML=l.body;
-  document.getElementById('m-res').innerHTML=l.res.map(r=>`<a href="${r.u}" target="_blank" class="rl"><span class="rl-ic">${r.i}</span><span class="rl-lb">${r.l}</span><span class="rl-tp">${r.t}</span></a>`).join('');
-  document.getElementById('lmov').classList.add('on');
-  if(!ST.completedLessons)ST.completedLessons=[];
-  if(!ST.completedLessons.includes(i)){ST.completedLessons.push(i);addXP(5);addA('Read: '+l.title,'📖');saveS();fltL();rndDB();}
-}
-function clsMov(){document.getElementById('lmov').classList.remove('on');}
-function goQ(){clsMov();document.getElementById('quiz').scrollIntoView({behavior:'smooth'});setTimeout(()=>{const b=document.querySelector(`.tbtn[onclick*="'${MLT}'"]`);if(b)selT(b,MLT);},600);}
 
-// QUIZ
-function selT(b,t){document.querySelectorAll('.tbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');ST.qt=t;document.getElementById('stqbtn').disabled=false;document.getElementById('tval').textContent='';}
-function startQ(){
-  if(!ST.qt){document.getElementById('tval').textContent='Please select a topic first.';return;}
-  ST.cq=0;ST.score=0;
-  document.getElementById('tpick').style.display='none';document.getElementById('qres').style.display='none';document.getElementById('qarea').style.display='block';
-  rndQ();
+function openL(i) {
+  const l = LS[i]; MLT = l.topic;
+  document.getElementById('m-era').textContent = l.era;
+  document.getElementById('m-tit').textContent = l.title;
+  const kfEl = document.getElementById('m-kf');
+  kfEl.innerHTML = l.kf && l.kf.length
+    ? '<p class="kflbl">Key Figures</p><div class="kfrow">'+l.kf.map(f=>'<span class="kfc">'+f+'</span>').join('')+'</div>'
+    : '';
+  document.getElementById('m-body').innerHTML = l.body;
+  document.getElementById('m-res').innerHTML = l.res.map(r =>
+    '<a href="'+r.u+'" target="_blank" class="rl">'
+    +'<span class="rl-ic">'+r.i+'</span>'
+    +'<span class="rl-lb">'+r.l+'</span>'
+    +'<span class="rl-tp">'+r.t+'</span>'
+    +'</a>'
+  ).join('');
+  document.getElementById('lmov').classList.add('show');
+  // Track completion if logged in
+  if (CU) {
+    if (!ST.completedLessons) ST.completedLessons = [];
+    if (!ST.completedLessons.includes(i)) {
+      ST.completedLessons.push(i);
+      addXP(5); addA('Read: '+l.title, '\uD83D\uDCDA');
+      saveS(); fltL(); rndDB();
+    }
+  }
 }
-function rndQ(){
-  const qs=QD[ST.qt],q=qs[ST.cq];ST.qa=false;
-  document.getElementById('qcnt').textContent=`${ST.cq+1} / ${qs.length}`;
-  document.getElementById('qtlbl').textContent=TL2(ST.qt);
-  document.getElementById('qpb').style.width=`${(ST.cq/qs.length)*100}%`;
-  document.getElementById('qq').textContent=q.q;
-  const fb=document.getElementById('qfb');fb.textContent='';fb.style.color='#555';
-  document.getElementById('nxtbtn').style.display='none';
-  const op=document.getElementById('qopts');op.innerHTML='';
-  q.opts.forEach((o,i)=>{const b=document.createElement('button');b.className='ob';b.textContent=o;b.onclick=()=>ansQ(i,b);op.appendChild(b);});
+
+function clsMov() { document.getElementById('lmov').classList.remove('show'); }
+
+function goQ() {
+  clsMov();
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+  setTimeout(() => {
+    const btn = document.querySelector('.tbtn[onclick*="\''+MLT+'\'"]');
+    if (btn) selT(btn, MLT);
+  }, 600);
 }
-function ansQ(i,btn){
-  if(ST.qa)return;ST.qa=true;
-  const q=QD[ST.qt][ST.cq];
+
+// ── QUIZ ───────────────────────────────────────────────────────
+function selT(btn, t) {
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  ST.qt = t;
+  document.getElementById('stqbtn').disabled = false;
+  document.getElementById('tval').textContent = '';
+}
+
+function startQ() {
+  if (!ST.qt) { document.getElementById('tval').textContent='Please select a topic first.'; return; }
+  requireLogin(
+    '\uD83D\uDCDD', 'Save your quiz scores',
+    'Sign in to track scores, earn XP, and build your study streak. Free to join!',
+    function() {
+      ST.cq = 0; ST.score = 0;
+      document.getElementById('tpick').style.display = 'none';
+      document.getElementById('qres').style.display  = 'none';
+      document.getElementById('qarea').style.display = 'block';
+      rndQ();
+    }
+  );
+}
+
+function rndQ() {
+  const qs = QD[ST.qt], q = qs[ST.cq];
+  ST.qa = false;
+  document.getElementById('qcnt').textContent  = (ST.cq+1)+' / '+qs.length;
+  document.getElementById('qtlbl').textContent = TL2(ST.qt);
+  document.getElementById('qpb').style.width   = (ST.cq/qs.length*100)+'%';
+  document.getElementById('qq').textContent    = q.q;
+  const fb = document.getElementById('qfb');
+  fb.textContent = ''; fb.style.color = '#555';
+  document.getElementById('nxtbtn').style.display = 'none';
+  const op = document.getElementById('qopts'); op.innerHTML = '';
+  q.opts.forEach((o,i) => {
+    const b = document.createElement('button');
+    b.className = 'ob'; b.textContent = o;
+    b.onclick = () => ansQ(i, b);
+    op.appendChild(b);
+  });
+}
+
+function ansQ(i, btn) {
+  if (ST.qa) return; ST.qa = true;
+  const q = QD[ST.qt][ST.cq];
   document.querySelectorAll('.ob').forEach(b=>b.disabled=true);
-  const fb=document.getElementById('qfb');
-  if(i===q.a){btn.classList.add('cor');ST.score++;fb.style.color='var(--success)';fb.textContent='✓ Correct! '+q.exp;}
-  else{btn.classList.add('wrg');document.querySelectorAll('.ob')[q.a].classList.add('cor');fb.style.color='var(--red)';fb.textContent='✗ '+q.exp;}
-  const nb=document.getElementById('nxtbtn');nb.style.display='inline-block';
-  nb.textContent=ST.cq+1<QD[ST.qt].length?'Next →':'See Results →';
+  const fb = document.getElementById('qfb');
+  if (i === q.a) {
+    btn.classList.add('cor'); ST.score++;
+    fb.style.color = 'var(--success)'; fb.textContent = '\u2713 Correct! '+q.exp;
+  } else {
+    btn.classList.add('wrg');
+    document.querySelectorAll('.ob')[q.a].classList.add('cor');
+    fb.style.color = 'var(--red)'; fb.textContent = '\u2717 '+q.exp;
+  }
+  const nb = document.getElementById('nxtbtn');
+  nb.style.display = 'inline-block';
+  nb.textContent = ST.cq+1 < QD[ST.qt].length ? 'Next \u2192' : 'See Results \u2192';
 }
-function nxtQ(){ST.cq++;if(ST.cq<QD[ST.qt].length)rndQ();else showRes();}
-function showRes(){
-  document.getElementById('qarea').style.display='none';document.getElementById('qres').style.display='block';
-  const tot=QD[ST.qt].length,pct=Math.round((ST.score/tot)*100);
-  document.getElementById('rsc').textContent=`${ST.score}/${tot}`;
-  document.getElementById('rlb').textContent=pct<40?"Keep studying — you've got this!":pct<60?"Good effort — review the explanations!":pct<80?"Nice work — getting there!":pct<100?"Great job!":"Outstanding! Perfect score! 🌟";
-  if(!ST.topicScores)ST.topicScores={};if(!ST.topicScores[ST.qt])ST.topicScores[ST.qt]=[];
+
+function nxtQ() {
+  ST.cq++;
+  if (ST.cq < QD[ST.qt].length) rndQ(); else showRes();
+}
+
+function showRes() {
+  document.getElementById('qarea').style.display = 'none';
+  document.getElementById('qres').style.display  = 'block';
+  const tot = QD[ST.qt].length;
+  const pct = Math.round(ST.score/tot*100);
+  document.getElementById('rsc').textContent = ST.score+'/'+tot;
+  document.getElementById('rlb').textContent = pct<40 ? "Keep studying \u2014 you've got this!" :
+    pct<60 ? 'Good effort \u2014 review the explanations!' :
+    pct<80 ? 'Nice work \u2014 getting there!' :
+    pct<100 ? 'Great job!' : 'Outstanding! Perfect score! \uD83C\uDF1F';
+  if (!ST.topicScores) ST.topicScores = {};
+  if (!ST.topicScores[ST.qt]) ST.topicScores[ST.qt] = [];
   ST.topicScores[ST.qt].push(pct);
-  const xe=ST.score*10;addXP(xe);updStr();
-  if(pct===100)chkB('perfect');if(pct>=80)chkB('highscore');if(pct>=60)chkB('studied');
-  const earned=[];
-  if(pct===100)earned.push({i:'🌟',n:'Perfect Score',c:'rb-g'});
-  else if(pct>=80)earned.push({i:'🏆',n:'High Scorer',c:'rb-g'});
-  else if(pct>=60)earned.push({i:'📚',n:'Good Effort',c:'rb-s'});
-  earned.push({i:'⭐',n:`+${xe} XP`,c:'rb-b'});
-  document.getElementById('rbd').innerHTML=earned.map(b=>`<span class="rb ${b.c}">${b.i} ${b.n}</span>`).join('');
-  addA(`Quiz: ${TL2(ST.qt)} — ${ST.score}/${tot} (${pct}%)`,'📝');
+  const xe = ST.score * 10;
+  addXP(xe); updStr();
+  if (pct===100) chkB('perfect');
+  if (pct>=80)   chkB('highscore');
+  if (pct>=60)   chkB('studied');
+  const earned = [];
+  if (pct===100) earned.push({i:'\uD83C\uDF1F',n:'Perfect Score',c:'rb-g'});
+  else if (pct>=80) earned.push({i:'\uD83C\uDFC6',n:'High Scorer',c:'rb-g'});
+  else if (pct>=60) earned.push({i:'\uD83D\uDCDA',n:'Good Effort',c:'rb-s'});
+  earned.push({i:'\u2B50',n:'+'+xe+' XP',c:'rb-b'});
+  document.getElementById('rbd').innerHTML = earned.map(b=>'<span class="rb '+b.c+'">'+b.i+' '+b.n+'</span>').join('');
+  addA('Quiz: '+TL2(ST.qt)+' \u2014 '+ST.score+'/'+tot+' ('+pct+'%)', '\uD83D\uDCDD');
   const keys=['colonial','revolution','civilwar','reconstruction','wwi','wwii','civilrights','coldwar'];
-  if(keys.every(k=>ST.topicScores[k]&&ST.topicScores[k].length>0))chkB('allTopics');
-  saveS();rndDB();
-}
-function rstQ(){document.getElementById('qres').style.display='none';document.getElementById('tpick').style.display='block';document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));ST.qt=null;document.getElementById('stqbtn').disabled=true;}
-function TL2(t){return{colonial:'Colonial Era',revolution:'Revolution',civilwar:'Civil War',reconstruction:'Reconstruction',wwi:'WWI',wwii:'World Wars',civilrights:'Civil Rights',coldwar:'Cold War'}[t]||t;}
-
-// TIMELINE
-function rndTL(){
-  document.getElementById('tlc').innerHTML=TLV.map((e,i)=>`<div class="tli" onclick="this.classList.toggle('on')"><div class="tld"></div><div class="tly">${e.y}</div><div class="tltit">${e.t}</div><div class="tlde">${e.d}</div><div class="tlx">${e.x}</div></div>`).join('');
+  if (keys.every(k=>ST.topicScores[k]&&ST.topicScores[k].length>0)) chkB('allTopics');
+  saveS(); rndDB();
 }
 
-// XP / BADGES / STREAK
-const LVLS=[{m:0,l:'Apprentice'},{m:50,l:'Student'},{m:150,l:'Scholar'},{m:300,l:'Historian'},{m:500,l:'Expert'},{m:800,l:'Master Historian'}];
-const BADGES=[{id:'perfect',i:'🌟',n:'Perfect Score'},{id:'highscore',i:'🏆',n:'High Scorer'},{id:'studied',i:'📚',n:'Good Effort'},{id:'streak3',i:'🔥',n:'3-Day Streak'},{id:'streak7',i:'⚡',n:'7-Day Streak'},{id:'logger',i:'📋',n:'Session Logger'},{id:'reader',i:'📖',n:'Avid Reader'},{id:'allTopics',i:'🗺️',n:'All Topics'}];
-function addXP(a){ST.xp=(ST.xp||0)+a;toast(`+${a} XP earned!`);}
-function chkB(id){if(!ST.badges)ST.badges=[];if(!ST.badges.includes(id)){ST.badges.push(id);const b=BADGES.find(x=>x.id===id);toast('🏅 Badge: '+(b?b.n:id));}}
-function updStr(){const t=new Date().toDateString();if(ST.lastStudied===t)return;const y=new Date(Date.now()-86400000).toDateString();ST.streak=ST.lastStudied===y?(ST.streak||0)+1:1;ST.lastStudied=t;if(ST.streak>=3)chkB('streak3');if(ST.streak>=7)chkB('streak7');}
-function addA(tx,ic){if(!ST.activities)ST.activities=[];ST.activities.push({tx,ic,tm:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});}
-
-// DASHBOARD
-function rndDB(){
-  document.getElementById('dsn').textContent=ST.streak||0;
-  const xp=ST.xp||0;let lv=LVLS[0],li=0;
-  for(let i=LVLS.length-1;i>=0;i--){if(xp>=LVLS[i].m){lv=LVLS[i];li=i;break;}}
-  const nx=LVLS[li+1];
-  document.getElementById('dxlv').textContent=`Level ${li+1} — ${lv.l}`;
-  document.getElementById('dxc').textContent=`${xp} XP`;
-  const p=nx?Math.min(100,Math.round(((xp-lv.m)/(nx.m-lv.m))*100)):100;
-  document.getElementById('dxb').style.width=p+'%';
-  document.getElementById('dxn').textContent=nx?`${nx.m-xp} XP to next level`:'Max level reached!';
-  const keys=['colonial','revolution','civilwar','reconstruction','wwi','wwii','civilrights','coldwar'];
-  document.getElementById('dtpr').innerHTML=keys.map(k=>{const sc=(ST.topicScores||{})[k]||[],best=sc.length?Math.max(...sc):0;return`<div class="tpro"><span class="tpl">${TL2(k)}</span><div class="tpbw"><div class="tpb" style="width:${best}%"></div></div><span class="tpp">${sc.length?best+'%':'—'}</span></div>`;}).join('');
-  if((ST.completedLessons||[]).length>=3)chkB('reader');
-  document.getElementById('dbg').innerHTML=BADGES.map(b=>{const e=(ST.badges||[]).includes(b.id);return`<div class="bi${e?' on':''}"><span class="bic">${b.i}</span>${b.n}</div>`;}).join('');
-  const log=document.getElementById('dal');
-  if(!ST.activities||!ST.activities.length){log.innerHTML='<li style="color:#aaa;font-size:.83rem">No activity yet — take a quiz or log a session!</li>';}
-  else{log.innerHTML=ST.activities.slice(-6).reverse().map(a=>`<li><span style="flex-shrink:0">${a.ic}</span><span style="flex:1">${a.tx}</span><span class="at">${a.tm}</span></li>`).join('');}
-}
-function logS(){
-  const tp=document.getElementById('ltop').value,mn=document.getElementById('lmin').value;
-  let ok=true;document.getElementById('lt-e').textContent='';document.getElementById('lm-e').textContent='';
-  if(!tp){document.getElementById('lt-e').textContent='Please select a topic.';ok=false;}
-  if(!mn||mn<1||mn>480){document.getElementById('lm-e').textContent='Enter valid minutes (1-480).';ok=false;}
-  if(!ok)return;
-  addXP(Math.floor(parseInt(mn)/5)*5);updStr();chkB('logger');addA(`Studied ${tp} for ${mn} min`,'⏱️');saveS();rndDB();
-  document.getElementById('ltop').value='';document.getElementById('lmin').value='';
-  toast('Session logged! Keep it up 🔥');
+function rstQ() {
+  document.getElementById('qres').style.display  = 'none';
+  document.getElementById('tpick').style.display = 'block';
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
+  ST.qt = null;
+  document.getElementById('stqbtn').disabled = true;
 }
 
-// SCHEDULING
-function vf(id,eid,msg,cond){const el=document.getElementById(id),ee=document.getElementById(eid);if(cond){el.classList.add('err');ee.textContent=msg;return false;}el.classList.remove('err');ee.textContent='';return true;}
-function subSc(){
-  const nm=document.getElementById('s-nm').value.trim(),em=document.getElementById('s-em').value.trim(),tp=document.getElementById('s-tp').value,ty=document.getElementById('s-ty').value,dt=document.getElementById('s-dt').value,tm=document.getElementById('s-tm').value;
-  const td=new Date().toISOString().split('T')[0],er=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const v=[vf('s-nm','e-nm','Name is required.',!nm),vf('s-em','e-em','Enter a valid email.',!er.test(em)),vf('s-tp','e-tp','Please select a topic.',!tp),vf('s-ty','e-ty','Please select a session type.',!ty),vf('s-dt','e-dt','Select today or a future date.',!dt||dt<td),vf('s-tm','e-tm','Please select a preferred time.',!tm)];
-  if(v.some(x=>!x))return;
-  if(!ST.sessions)ST.sessions=[];
-  ST.sessions.push({nm,em,tp,ty,dt,tm});
-  saveS();rndSc();
-  document.getElementById('ssucc').style.display='block';
-  ['s-nm','s-em','s-nt'].forEach(id=>document.getElementById(id).value='');
-  ['s-tp','s-ty','s-dt','s-tm'].forEach(id=>document.getElementById(id).value='');
-  setTimeout(()=>document.getElementById('ssucc').style.display='none',5000);
-  addA(`Session booked: ${tp} (${ty})`,'📅');saveS();rndDB();
-}
-function rndSc(){
-  const list=document.getElementById('sclist');
-  if(!ST.sessions||!ST.sessions.length){list.innerHTML='';return;}
-  list.innerHTML='<p style="font-size:.78rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Your Upcoming Sessions</p>'+
-    ST.sessions.slice(-4).reverse().map(s=>`<div class="sit"><div><div class="sinm">${s.ty} — ${s.tp}</div><div class="sime">${s.dt} &middot; ${s.tm} &middot; ${s.nm} (${s.em})</div></div><span class="sbg">Pending</span></div>`).join('');
+function TL2(t) {
+  return {colonial:'Colonial Era',revolution:'Revolution',civilwar:'Civil War',
+          reconstruction:'Reconstruction',wwi:'WWI',wwii:'World Wars',
+          civilrights:'Civil Rights',coldwar:'Cold War'}[t] || t;
 }
 
-// INIT
-function initAll(){
-  rndLessons();rndTL();rndDB();rndSc();
-  document.getElementById('s-dt').min=new Date().toISOString().split('T')[0];
-  document.getElementById('lmov').addEventListener('click',function(e){if(e.target===this)clsMov();});
+// ── TIMELINE ───────────────────────────────────────────────────
+function rndTL() {
+  document.getElementById('tlc').innerHTML = TLV.map(e =>
+    '<div class="tli" onclick="this.classList.toggle(\'open\')">'
+    +'<div class="tld"></div>'
+    +'<div class="tly">'+e.y+'</div>'
+    +'<div class="tltit">'+e.t+'</div>'
+    +'<div class="tlde">'+e.d+'</div>'
+    +'<div class="tlx">'+e.x+'</div>'
+    +'</div>'
+  ).join('');
 }
 
-window.addEventListener('DOMContentLoaded',()=>{
-  try{const s=JSON.parse(localStorage.getItem('ush_sess')||'null');if(s&&s.e&&s.n){loginOK(s.e,s.n);return;}}catch(e){}
+// ── XP / BADGES / STREAK ───────────────────────────────────────
+const LVLS = [{m:0,l:'Apprentice'},{m:50,l:'Student'},{m:150,l:'Scholar'},
+              {m:300,l:'Historian'},{m:500,l:'Expert'},{m:800,l:'Master Historian'}];
+const BADGES = [
+  {id:'perfect',  i:'\uD83C\uDF1F', n:'Perfect Score'},
+  {id:'highscore',i:'\uD83C\uDFC6', n:'High Scorer'},
+  {id:'studied',  i:'\uD83D\uDCDA', n:'Good Effort'},
+  {id:'streak3',  i:'\uD83D\uDD25', n:'3-Day Streak'},
+  {id:'streak7',  i:'\u26A1',       n:'7-Day Streak'},
+  {id:'logger',   i:'\uD83D\uDCCB', n:'Session Logger'},
+  {id:'reader',   i:'\uD83D\uDCD6', n:'Avid Reader'},
+  {id:'allTopics',i:'\uD83D\uDDFA', n:'All Topics'}
+];
+
+function addXP(a)  { ST.xp = (ST.xp||0)+a; toast('+'+a+' XP earned!'); }
+function chkB(id)  {
+  if (!ST.badges) ST.badges = [];
+  if (!ST.badges.includes(id)) {
+    ST.badges.push(id);
+    const b = BADGES.find(x=>x.id===id);
+    toast('\uD83C\uDFC5 Badge: '+(b?b.n:id));
+  }
+}
+function updStr() {
+  const today = new Date().toDateString();
+  if (ST.lastStudied === today) return;
+  const yest = new Date(Date.now()-86400000).toDateString();
+  ST.streak = ST.lastStudied === yest ? (ST.streak||0)+1 : 1;
+  ST.lastStudied = today;
+  if (ST.streak >= 3) chkB('streak3');
+  if (ST.streak >= 7) chkB('streak7');
+}
+function addA(tx, ic) {
+  if (!ST.activities) ST.activities = [];
+  ST.activities.push({tx, ic, tm:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+}
+
+// ── DASHBOARD ──────────────────────────────────────────────────
+function rndDB() {
+  document.getElementById('dsn').textContent = ST.streak || 0;
+  const xp = ST.xp || 0;
+  let lv = LVLS[0], li = 0;
+  for (let i=LVLS.length-1; i>=0; i--) { if (xp>=LVLS[i].m){lv=LVLS[i];li=i;break;} }
+  const nx = LVLS[li+1];
+  document.getElementById('dxlv').textContent = 'Level '+(li+1)+' \u2014 '+lv.l;
+  document.getElementById('dxc').textContent  = xp+' XP';
+  const p = nx ? Math.min(100, Math.round((xp-lv.m)/(nx.m-lv.m)*100)) : 100;
+  document.getElementById('dxb').style.width  = p+'%';
+  document.getElementById('dxn').textContent  = nx ? (nx.m-xp)+' XP to next level' : 'Max level reached!';
+  const keys = ['colonial','revolution','civilwar','reconstruction','wwi','wwii','civilrights','coldwar'];
+  document.getElementById('dtpr').innerHTML = keys.map(k => {
+    const sc = (ST.topicScores||{})[k]||[], best = sc.length ? Math.max(...sc) : 0;
+    return '<div class="tpro">'
+      +'<span class="tpl">'+TL2(k)+'</span>'
+      +'<div class="tpbw"><div class="tpb" style="width:'+best+'%"></div></div>'
+      +'<span class="tpp">'+(sc.length?best+'%':'\u2014')+'</span>'
+      +'</div>';
+  }).join('');
+  if ((ST.completedLessons||[]).length >= 3) chkB('reader');
+  document.getElementById('dbg').innerHTML = BADGES.map(b => {
+    const e = (ST.badges||[]).includes(b.id);
+    return '<div class="bi'+(e?' earned':'')+'"><span class="bic">'+b.i+'</span>'+b.n+'</div>';
+  }).join('');
+  const log = document.getElementById('dal');
+  if (!ST.activities || !ST.activities.length) {
+    log.innerHTML = '<li style="color:#aaa;font-size:.83rem">No activity yet \u2014 take a quiz or log a session!</li>';
+  } else {
+    log.innerHTML = ST.activities.slice(-6).reverse().map(a =>
+      '<li><span style="flex-shrink:0">'+a.ic+'</span><span style="flex:1">'+a.tx+'</span><span class="at">'+a.tm+'</span></li>'
+    ).join('');
+  }
+}
+
+function logS() {
+  const tp = document.getElementById('ltop').value;
+  const mn = document.getElementById('lmin').value;
+  let ok = true;
+  document.getElementById('lt-e').textContent = '';
+  document.getElementById('lm-e').textContent = '';
+  if (!tp) { document.getElementById('lt-e').textContent='Please select a topic.'; ok=false; }
+  if (!mn||mn<1||mn>480) { document.getElementById('lm-e').textContent='Enter valid minutes (1-480).'; ok=false; }
+  if (!ok) return;
+  requireLogin(
+    '\u23F1\uFE0F', 'Log your study session',
+    'Sign in to save study time, earn XP, and build your daily streak.',
+    function() {
+      addXP(Math.floor(parseInt(mn)/5)*5);
+      updStr(); chkB('logger');
+      addA('Studied '+tp+' for '+mn+' min', '\u23F1\uFE0F');
+      saveS(); rndDB();
+      document.getElementById('ltop').value = '';
+      document.getElementById('lmin').value = '';
+      toast('Session logged! Keep it up \uD83D\uDD25');
+    }
+  );
+}
+
+// ── SCHEDULING ─────────────────────────────────────────────────
+function vf(id, eid, msg, cond) {
+  const el=document.getElementById(id), ee=document.getElementById(eid);
+  if (cond) { el.classList.add('err'); ee.textContent=msg; return false; }
+  el.classList.remove('err'); ee.textContent=''; return true;
+}
+
+function subSc() {
+  const nm=document.getElementById('s-nm').value.trim();
+  const em=document.getElementById('s-em').value.trim();
+  const tp=document.getElementById('s-tp').value;
+  const ty=document.getElementById('s-ty').value;
+  const dt=document.getElementById('s-dt').value;
+  const tm=document.getElementById('s-tm').value;
+  const td=new Date().toISOString().split('T')[0];
+  const er=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const v=[
+    vf('s-nm','e-nm','Name is required.',!nm),
+    vf('s-em','e-em','Enter a valid email.',!er.test(em)),
+    vf('s-tp','e-tp','Please select a topic.',!tp),
+    vf('s-ty','e-ty','Please select a session type.',!ty),
+    vf('s-dt','e-dt','Select today or a future date.',!dt||dt<td),
+    vf('s-tm','e-tm','Please select a preferred time.',!tm)
+  ];
+  if (v.some(x=>!x)) return;
+  requireLogin(
+    '\uD83D\uDCC5', 'Book your study session',
+    'Sign in to save your session requests and track upcoming tutoring appointments.',
+    function() {
+      if (!ST.sessions) ST.sessions = [];
+      ST.sessions.push({nm,em,tp,ty,dt,tm});
+      saveS(); rndSc();
+      document.getElementById('ssucc').style.display = 'block';
+      ['s-nm','s-em','s-nt'].forEach(id=>document.getElementById(id).value='');
+      ['s-tp','s-ty','s-dt','s-tm'].forEach(id=>document.getElementById(id).value='');
+      setTimeout(()=>document.getElementById('ssucc').style.display='none', 5000);
+      addA('Session booked: '+tp+' ('+ty+')', '\uD83D\uDCC5');
+      saveS(); rndDB();
+    }
+  );
+}
+
+function rndSc() {
+  const list = document.getElementById('sclist');
+  if (!ST.sessions || !ST.sessions.length) { list.innerHTML=''; return; }
+  list.innerHTML = '<p style="font-size:.78rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Your Upcoming Sessions</p>'
+    + ST.sessions.slice(-4).reverse().map(s =>
+        '<div class="sit">'
+        +'<div><div class="sinm">'+s.ty+' \u2014 '+s.tp+'</div>'
+        +'<div class="sime">'+s.dt+' &middot; '+s.tm+' &middot; '+s.nm+' ('+s.em+')</div></div>'
+        +'<span class="sbg">Pending</span>'
+        +'</div>'
+    ).join('');
+}
+
+// ── INIT ───────────────────────────────────────────────────────
+function initAll() {
+  rndLessons(); rndTL(); rndDB(); rndSc();
+  document.getElementById('s-dt').min = new Date().toISOString().split('T')[0];
+  // Close modals on backdrop click
+  document.getElementById('lmov').addEventListener('click', function(e){ if(e.target===this) clsMov(); });
+  document.getElementById('auth-modal').addEventListener('click', function(e){ if(e.target===this) closeAuth(); });
+  document.getElementById('gate-popup').addEventListener('click', function(e){ if(e.target===this) closeGate(); });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initAll();
+  // Auto-login from saved session
+  try {
+    const s = JSON.parse(localStorage.getItem('ush_sess') || 'null');
+    if (s && s.e && s.n) {
+      const u = gU();
+      if (u[s.e]) {
+        CU = {e:s.e, n:s.n};
+        const sv = gUS(s.e);
+        ST = sv ? {...ds(), ...sv} : ds();
+        document.getElementById('nav-guest').style.display = 'none';
+        document.getElementById('nav-user').style.display  = 'flex';
+        document.getElementById('nav-av').textContent = s.n.charAt(0).toUpperCase();
+        document.getElementById('nav-nm').textContent = s.n.split(' ')[0];
+        rndDB(); rndSc(); fltL();
+      }
+    }
+  } catch(e) {}
 });
 </script>
-</body></html>
+
+</body>
+</html>
